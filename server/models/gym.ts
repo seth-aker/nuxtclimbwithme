@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 export interface IGym {
-    gymId: string;
+    _id: mongoose.Types.ObjectId;
     name: string;
     location: {
       type: 'Point';
@@ -18,7 +18,6 @@ export interface IGym {
     updatedAt?: Date;
   }
 const gymSchema = new mongoose.Schema<IGym>({
-    gymId: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     location: {
         type: {

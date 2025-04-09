@@ -1,6 +1,12 @@
-import User from "~/server/models/user";
+import User from "~/server/models/User";
 export default defineEventHandler(async (event) => {
   const userId = getRouterParam(event, 'id');
+  if(!userId) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Bad Request",
+    })
+  }
   const user = await User.findByIdAndDelete(userId);
   if(!user) {
     throw createError({

@@ -1,18 +1,17 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 export interface IConnectionRequest {
     _id: mongoose.Types.ObjectId;
-    senderId: string; // Refers to User ID
-    receiverId: string; // Refers to User ID
-    status?: 'Pending' | 'Accepted' | 'Rejected';
+    senderId: mongoose.Types.ObjectId; // Refers to User ID
+    receiverId: mongoose.Types.ObjectId; // Refers to User ID
+    status?: 'Pending' | 'Accepted' | 'Rejected' | 'Withdrawn';
     createdAt?: Date;
     updatedAt?: Date;
 }
 const connectionRequestSchema = new mongoose.Schema<IConnectionRequest>({
-    _id: mongoose.Types.ObjectId,
-    senderId: { type: String, ref: 'User', required: true },
-    receiverId: { type: String, ref: 'User', required: true },
-    status: { type: String, enum: ['Pending', 'Accepted', 'Rejected'], default: 'Pending' },
+    senderId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    receiverId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    status: { type: String, enum: ['Pending', 'Accepted', 'Rejected', 'Withdrawn'], default: 'Pending' },
 }, {timestamps: true});
 
 export default mongoose.model<IConnectionRequest>('ConnectionRequest', connectionRequestSchema)

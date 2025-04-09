@@ -16,6 +16,9 @@ export default defineNuxtConfig({
   ],
   oidc: {
     defaultProvider: "auth0",
+    middleware: {
+      globalMiddlewareEnabled: false
+    },
     providers: {
       auth0: {
         additionalAuthParameters: {
@@ -33,7 +36,7 @@ export default defineNuxtConfig({
     },
   },
   shadcn: {
-    prefix: 'U',
+    prefix: '',
     componentDir: './components/ui'
   },
   vite: {

@@ -1,18 +1,17 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 export interface IChatMessage {
     _id: mongoose.Types.ObjectId;
-    groupId: string;
-    senderId: string; // Refers to User ID
+    groupId: mongoose.Types.ObjectId;
+    senderId: mongoose.Types.ObjectId; // Refers to User ID
     content: string;
     timestamp?: Date;
-    readBy: boolean;
+    readBy: [mongoose.Types.ObjectId];
   }
 const chatMessageSchema = new mongoose.Schema<IChatMessage>({
-    _id: mongoose.SchemaTypes.ObjectId,
-    groupId: { type: String, ref: 'ChatGroup', required: true },
-    senderId: { type: String, ref: 'User', required: true },
+    groupId: { type: Schema.Types.ObjectId, ref: 'ChatGroup', required: true },
+    senderId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     content: { type: String, required: true },
     timestamp: { type: Date, default: Date.now },
-    readBy: [{ type: String, ref: 'User' }],
+    readBy: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 export default mongoose.model<IChatMessage>('ChatMessage', chatMessageSchema);

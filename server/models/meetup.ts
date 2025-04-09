@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 export interface IMeetup {
     _id: mongoose.Types.ObjectId;
-    organizerId: string; // Reference to User ID
+    organizerId: mongoose.Types.ObjectId; // Reference to User ID
     title: string;
     description?: string;
     location: {
@@ -24,8 +24,7 @@ export interface IMeetup {
     updatedAt?: Date;
 }
 const meetupSchema = new mongoose.Schema<IMeetup>({
-    _id: mongoose.Types.ObjectId,
-    organizerId: { type: String, ref: 'User', required: true }, // ID of the user who created the meetup
+    organizerId: { type: Schema.Types.ObjectId, ref: 'User', required: true }, // ID of the user who created the meetup
     title: { type: String, required: true },
     description: { type: String },
     location: {
@@ -44,7 +43,7 @@ const meetupSchema = new mongoose.Schema<IMeetup>({
     },
     dateTime: { type: Date, required: true },
     capacity: { type: Number }, // Maximum number of participants
-    participants: [{ type: String, ref: 'User' }], // Array of user IDs participating
+    participants: [{ type: Schema.Types.ObjectId, ref: 'User' }], // Array of user IDs participating
     requiredExperience: {
         boulderingGrade: { type: String },
         leadClimbingGrade: { type: String },
