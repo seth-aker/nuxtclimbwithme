@@ -1,5 +1,4 @@
-import mongoose from 'mongoose';
-import  User, { IUser } from '~/server/models/User'
+import  User from '~/server/models/User'
 import readBodyProtection from "~/server/utils/readBodyProtection";
 
 export default defineEventHandler(async (event) => {

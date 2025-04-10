@@ -17,7 +17,7 @@ export default defineNuxtConfig({
   oidc: {
     defaultProvider: "auth0",
     middleware: {
-      globalMiddlewareEnabled: false
+      globalMiddlewareEnabled: true
     },
     providers: {
       auth0: {
@@ -32,8 +32,13 @@ export default defineNuxtConfig({
         clientId: '',
         clientSecret: '',
         redirectUri: '',
+         scope: ['openid', 'offline_access', 'profile', 'email'],
       },
     },
+  },
+  runtimeConfig: {
+    mongodbUri: '',
+    dbName: '',
   },
   shadcn: {
     prefix: '',
