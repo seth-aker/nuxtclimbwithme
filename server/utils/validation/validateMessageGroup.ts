@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { objectIdSchema } from "./validateObjectId";
 
-export const chatGroupSchema = z.object({
+export const messageGroupSchema = z.object({
   name: z.string(),
   description: z.string().optional(),
   picture: z.string().optional(),
@@ -13,8 +13,8 @@ export const chatGroupSchema = z.object({
   updatedAt: z.coerce.date(),
 });
 
-export default function validateChatGroup(chatGroup: unknown) {
-  const result = chatGroupSchema.safeParse(chatGroup);
+export default function validateMessageGroup(messageGroup: unknown) {
+  const result = messageGroupSchema.safeParse(messageGroup);
   if (!result.success) {
     throw createError({
       statusCode: 400,

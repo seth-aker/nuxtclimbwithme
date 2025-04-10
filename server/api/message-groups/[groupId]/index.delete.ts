@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import ChatGroup from "~/server/models/ChatGroup";
-import ChatMessage from "~/server/models/ChatMessage";
+import ChatGroup from "~/server/models/MessageGroup";
+import ChatMessage from "~/server/models/Message";
 import findUserBySub from "~/server/utils/findUserBySub";
 
 export default defineEventHandler(async (event) => {

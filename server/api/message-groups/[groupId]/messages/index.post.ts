@@ -1,12 +1,12 @@
-import ChatGroup from "~/server/models/ChatGroup";
-import ChatMessage from "~/server/models/ChatMessage";
+import ChatGroup from "~/server/models/MessageGroup";
+import ChatMessage from "~/server/models/Message";
 import findUserBySub from "~/server/utils/findUserBySub";
 import userIsGroupMember from "~/server/utils/userIsGroupMember";
 
 export default defineEventHandler(async(event) => {
     // Authorize()
     readBodyProtection(event)
-    const body = await readBody(event);
+    const body = await readValidatedBody(event, validateMessage);
     const groupId = getRouterParam(event, 'groupId');
     if(!groupId) {
         throw createError({

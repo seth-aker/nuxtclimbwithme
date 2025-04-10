@@ -1,12 +1,11 @@
-import ChatGroup, { IChatGroup } from "~/server/models/ChatGroup"
-import User, { IUser } from "~/server/models/User";
-import findUserBySub from "~/server/utils/findUserBySub";
+import MessageGroup from "~/server/models/MessageGroup"
+import User from "~/server/models/User";
 
 export default defineEventHandler(async (event) => {
     //authorize()
     readBodyProtection(event);
     const user = await findUserBySub(event);
-    const body: IChatGroup = await readBody(event);
+    const body = await readValidatedBody(event, validateMessageGroup);
     const chatMembers = await User.find({_id: [body.members]});
     const userConnections = user.connections?.map((connection) => connection.toString())
     chatMembers.forEach((chatMember) => {
@@ -19,6 +18,6 @@ export default defineEventHandler(async (event) => {
         }
     })
     
-    await ChatGroup.create(body);
+    await MessageGroup.create(body);
     setResponseStatus(event, 201, "Chat Group Created Successfully");
 })

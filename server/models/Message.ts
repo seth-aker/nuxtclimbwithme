@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-export interface IChatMessage {
+export interface IMessage {
     _id: mongoose.Types.ObjectId;
     groupId: mongoose.Types.ObjectId;
     senderId: mongoose.Types.ObjectId; // Refers to User ID
@@ -7,11 +7,11 @@ export interface IChatMessage {
     timestamp?: Date;
     readBy: [mongoose.Types.ObjectId];
   }
-const chatMessageSchema = new mongoose.Schema<IChatMessage>({
+const messageSchema = new mongoose.Schema<IMessage>({
     groupId: { type: Schema.Types.ObjectId, ref: 'ChatGroup', required: true },
     senderId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     content: { type: String, required: true },
     timestamp: { type: Date, default: Date.now },
     readBy: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
-export default mongoose.model<IChatMessage>('ChatMessage', chatMessageSchema);
+export default mongoose.model<IMessage>('ChatMessage', messageSchema);

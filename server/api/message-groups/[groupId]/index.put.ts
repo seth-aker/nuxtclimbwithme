@@ -1,11 +1,12 @@
-import ChatGroup from "~/server/models/ChatGroup";
+import MessageGroup from "~/server/models/MessageGroup";
 import findUserBySub from "~/server/utils/findUserBySub";
+
 
 export default defineEventHandler(async (event) => {
     //authorize()
     const user = await findUserBySub(event);
     readBodyProtection(event);
-    const body = await readBody(event);
+    const body = await readValidatedBody(event, validateMessageGroup);
     const groupId = getRouterParam(event, 'groupId');
     if(!groupId) {
         throw createError({
@@ -14,8 +15,8 @@ export default defineEventHandler(async (event) => {
             message: "[API] Missing group id"
         })
     }
-    const chatGroup = await ChatGroup.findOne({_id: groupId}).exec();
-    if(!chatGroup) {
+    const messageGroup = await MessageGroup.findOne({_id: groupId}).exec();
+    if(!messageGroup) {
         throw createError({
             statusCode: 404,
             statusMessage: "Not found",
@@ -23,8 +24,8 @@ export default defineEventHandler(async (event) => {
         })
     }
     let isOwner = false;
-    for (let index = 0; index < chatGroup.owners.length; index++) {
-        const owner = chatGroup.owners[index];
+    for (let index = 0; index < messageGroup.owners.length; index++) {
+        const owner = messageGroup.owners[index];
         if(owner._id.equals(user._id)){
             isOwner = true;
             break;
@@ -37,6 +38,6 @@ export default defineEventHandler(async (event) => {
             message: "User does not have permission to edit the group"
         }) 
     } 
-    await chatGroup.overwrite(body).save();
+    await messageGroup.overwrite(body).save();
    
 })

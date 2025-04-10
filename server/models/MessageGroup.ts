@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-export interface IChatGroup {
+export interface IMessageGroup {
     _id: mongoose.Types.ObjectId,
     name: string,
     description?: string,
@@ -11,7 +11,7 @@ export interface IChatGroup {
     createdAt: Date,
     updatedAt: Date
 }
-const chatGroupSchema = new mongoose.Schema<IChatGroup>({
+const messageGroupSchema = new mongoose.Schema<IMessageGroup>({
     name: { type: String, required: true }, // Name of the group
     description: { type: String },
     picture: String, // URI for picture
@@ -21,4 +21,4 @@ const chatGroupSchema = new mongoose.Schema<IChatGroup>({
     lastMessageAt: { type: Date, default: Date.now },
 }, { timestamps: true });
 
-export default mongoose.model<IChatGroup>('ChatGroup', chatGroupSchema)
+export default mongoose.model<IMessageGroup>('ChatGroup', messageGroupSchema)

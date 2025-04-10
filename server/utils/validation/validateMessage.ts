@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { objectIdSchema } from "./validateObjectId";
 
-export const chatMessageSchema = z.object({
+export const messageSchema = z.object({
   groupId: objectIdSchema,
   senderId: objectIdSchema,
   content: z.string(),
@@ -9,8 +9,8 @@ export const chatMessageSchema = z.object({
   readBy: z.array(objectIdSchema),
 });
 
-export default function validateChatMessage(chatMessage: unknown) {
- const result = chatMessageSchema.safeParse(chatMessage);
+export default function validateMessage(chatMessage: unknown) {
+ const result = messageSchema.safeParse(chatMessage);
  if (!result.success) {
     throw createError({
       statusCode: 400,

@@ -1,7 +1,7 @@
-import { IChatGroup } from "../models/ChatGroup";
+import { IMessageGroup } from "../models/MessageGroup";
 import { IUser } from "../models/User";
 
-export default function(user: IUser, chatGroup: IChatGroup) {
+export default function(user: IUser, chatGroup: IMessageGroup) {
   let containsUser = false;
   for (let index = 0; index < chatGroup.members.length; index++) {
       const member = chatGroup.members[index];
