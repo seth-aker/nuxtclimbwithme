@@ -1,9 +1,9 @@
-import User, { IUser } from "~/server/models/User";
+import User from "~/server/models/User";
 
 export default defineEventHandler(async (event) => {
   // Authorize()
   readBodyProtection(event);
-  const body: IUser = await readBody(event);
+  const body = await readValidatedBody(event, validateUser);
   const userId = getRouterParam(event, 'id');
   if(!userId) {
     throw createError({

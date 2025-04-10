@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { IMeetupInvitation, meetupInvitationSchema } from "./MeetupInvitation";
 export interface IMeetup {
     _id: mongoose.Types.ObjectId;
     organizerId: mongoose.Types.ObjectId; // Reference to User ID
@@ -9,11 +10,13 @@ export interface IMeetup {
       coordinates: [number, number]; // [longitude, latitude]
       address?: string;
       gymId?: string; // Reference to Gym ID (optional)
-      gymName?: string; // Store gym name if gymId is not used
+      locationName?: string; // Store gym name if gymId is not used
     };
     dateTime: Date;
     capacity?: number;
     participants?: string[]; // Array of User IDs
+    invitations?: IMeetupInvitation[];
+    inviteOnly?: boolean;
     requiredExperience?: {
       boulderingGrade?: string;
       leadClimbingGrade?: string;
@@ -38,12 +41,14 @@ const meetupSchema = new mongoose.Schema<IMeetup>({
             index: '2dsphere'
         },
         address: { type: String }, // Optional human-readable address
-        gymId: { type: String, ref: 'Gym' }, // Optional link to a specific gym
-        gymName: { type: String }, // Store gym name if gymId is not used
+        gymId: { type: Schema.Types.ObjectId, ref: 'Gym' }, // Optional link to a specific gym
+        locationName: { type: String }, // Store location name if gymId is not used
     },
     dateTime: { type: Date, required: true },
     capacity: { type: Number }, // Maximum number of participants
     participants: [{ type: Schema.Types.ObjectId, ref: 'User' }], // Array of user IDs participating
+    invitations: [meetupInvitationSchema],
+    inviteOnly: { type: Boolean, default: false },
     requiredExperience: {
         boulderingGrade: { type: String },
         leadClimbingGrade: { type: String },

@@ -5,7 +5,7 @@ import readBodyProtection from "~/server/utils/readBodyProtection";
 export default defineEventHandler(async (event) => {
     // Authorize()
     readBodyProtection(event);
-    const body: IUser = await readBody(event);
+    const body = await readValidatedBody(event, validateUser);
     await User.create(body)
     setResponseStatus(event, 201, "User Created Successfully");
 });

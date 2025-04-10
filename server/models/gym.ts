@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 export interface IGym {
     _id: mongoose.Types.ObjectId;
     name: string;
@@ -10,6 +10,7 @@ export interface IGym {
       state?: string;
       zipCode?: string;
     };
+    owners: mongoose.Types.ObjectId[];
     website?: string;
     navigationUri?: string,
     phone?: string;
@@ -17,7 +18,7 @@ export interface IGym {
     createdAt?: Date;
     updatedAt?: Date;
   }
-const gymSchema = new mongoose.Schema<IGym>({
+const gymSchema = new mongoose.Schema({
     name: { type: String, required: true },
     location: {
         type: {
@@ -34,6 +35,7 @@ const gymSchema = new mongoose.Schema<IGym>({
         state: { type: String },
         zipCode: { type: String },
     },
+    owners: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     website: { type: String },
     navigationUri: { type: String },
     phone: { type: String },

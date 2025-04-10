@@ -1,5 +1,6 @@
 import User from "~/server/models/User";
 export default defineEventHandler(async (event) => {
+  // Authorize()
   const userId = getRouterParam(event, 'id');
   if(!userId) {
     throw createError({
