@@ -12,7 +12,8 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/icon',
     'shadcn-nuxt',
-    'nuxt-oidc-auth'
+    'nuxt-oidc-auth',
+    '@pinia/nuxt'
   ],
   oidc: {
     defaultProvider: "auth0",

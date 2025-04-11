@@ -1,12 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 
 export interface IConnectionRequest {
-    _id: mongoose.Types.ObjectId;
-    senderId: mongoose.Types.ObjectId; // Refers to User ID
-    receiverId: mongoose.Types.ObjectId; // Refers to User ID
+    _id: mongoose.Types.ObjectId | string;
+    senderId: mongoose.Types.ObjectId | string; // Refers to User ID
+    receiverId: mongoose.Types.ObjectId | string; // Refers to User ID
     status?: 'Pending' | 'Accepted' | 'Rejected' | 'Withdrawn';
-    createdAt?: Date;
-    updatedAt?: Date;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
 }
 const connectionRequestSchema = new mongoose.Schema<IConnectionRequest>({
     senderId: { type: Schema.Types.ObjectId, ref: 'User', required: true },

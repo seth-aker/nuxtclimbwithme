@@ -1,11 +1,11 @@
 import mongoose, { Schema } from "mongoose";
 export interface IMessage {
-    _id: mongoose.Types.ObjectId;
-    groupId: mongoose.Types.ObjectId;
-    senderId: mongoose.Types.ObjectId; // Refers to User ID
+    _id: mongoose.Types.ObjectId | string;
+    groupId: mongoose.Types.ObjectId | string;
+    senderId: mongoose.Types.ObjectId | string; // Refers to User ID
     content: string;
-    timestamp?: Date;
-    readBy: [mongoose.Types.ObjectId];
+    timestamp?: Date | string;
+    readBy: mongoose.Types.ObjectId[] | string[];
   }
 const messageSchema = new mongoose.Schema<IMessage>({
     groupId: { type: Schema.Types.ObjectId, ref: 'ChatGroup', required: true },

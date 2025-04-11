@@ -21,7 +21,8 @@ export default defineEventHandler(async (event) => {
             })
         }
         return user.toObject();
-    } catch (e: H3Error | any) {
+    } catch (e) {
+        console.error(e)
         if(!e?.statusCode || e.statusCode !== 404) {
             throw e
         }

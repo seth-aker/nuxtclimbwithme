@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 export interface IGym {
-    _id: mongoose.Types.ObjectId;
+    _id: mongoose.Types.ObjectId | string;
     name: string;
     location: {
       type: 'Point';
@@ -10,13 +10,13 @@ export interface IGym {
       state?: string;
       zipCode?: string;
     };
-    owners: mongoose.Types.ObjectId[];
+    owners: mongoose.Types.ObjectId[] | string[];
     website?: string;
     navigationUri?: string,
     phone?: string;
     amenities?: string[];
-    createdAt?: Date;
-    updatedAt?: Date;
+    createdAt?: Date | string[];
+    updatedAt?: Date | string[];
   }
 const gymSchema = new mongoose.Schema({
     name: { type: String, required: true },

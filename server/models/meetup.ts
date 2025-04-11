@@ -1,8 +1,8 @@
 import mongoose, { Schema } from "mongoose";
 import { IMeetupInvitation, meetupInvitationSchema } from "./MeetupInvitation";
 export interface IMeetup {
-    _id: mongoose.Types.ObjectId;
-    organizerId: mongoose.Types.ObjectId; // Reference to User ID
+    _id: mongoose.Types.ObjectId | string;
+    organizerId: mongoose.Types.ObjectId | string; // Reference to User ID
     title: string;
     description?: string;
     location: {
@@ -23,8 +23,8 @@ export interface IMeetup {
     };
     gearNeeded?: string[];
     status?: 'Open' | 'Full' | 'Cancelled' | 'Completed';
-    createdAt?: Date;
-    updatedAt?: Date;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
 }
 const meetupSchema = new mongoose.Schema<IMeetup>({
     organizerId: { type: Schema.Types.ObjectId, ref: 'User', required: true }, // ID of the user who created the meetup

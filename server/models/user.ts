@@ -1,8 +1,8 @@
 import mongoose, { Schema } from "mongoose"
 
 export interface IUser {
-    _id: mongoose.Types.ObjectId;
-    userId: string
+    _id: mongoose.Types.ObjectId | string;
+    authId: string
     username: string;
     email: string;
     phoneNumber?: string,
@@ -27,6 +27,7 @@ export interface IUser {
       timeOfDay?: ('Morning' | 'Afternoon' | 'Evening')[];
     };
     preferences?: {
+      colorTheme?: 'System' | 'Light' | 'Dark';
       preferredClimbingTypes?: ('Bouldering' | 'Sport' | 'Trad')[];
       preferredGrades?: {
         bouldering?: string;
@@ -37,16 +38,17 @@ export interface IUser {
     };
     interests?: string[];
     gearOwned?: string[];
-    connections: mongoose.Types.ObjectId[]; // Array of User IDs
-    requestsSent:  mongoose.Types.ObjectId[]; // Array of User IDs
-    requestsReceived:  mongoose.Types.ObjectId[]; // Array of User IDs
-    blocked: mongoose.Types.ObjectId[];
-    createdAt?: Date;
-    updatedAt?: Date;
+    connections: mongoose.Types.ObjectId[] | string[]; // Array of User IDs
+    requestsSent:  mongoose.Types.ObjectId[] | string[]; // Array of User IDs
+    requestsReceived:  mongoose.Types.ObjectId[] | string[]; // Array of User IDs
+    blocked: mongoose.Types.ObjectId[] | string[];
+    registrationCompleted: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
   }
 
 const userSchema = new mongoose.Schema<IUser>({
-    userId: {type: String, required: true, unique: true},
+    authId: {type: String, required: true, unique: true},
     email: { type: String, required: true, unique: true },
     phoneNumber: {type: String, required: false, unique: true},
     firstName: { type: String },
@@ -77,6 +79,7 @@ const userSchema = new mongoose.Schema<IUser>({
         timeOfDay: [{ type: String, enum: ['Morning', 'Afternoon', 'Evening'] }],
     },
     preferences: {
+        colorTheme: { type: String, enum: ['System', 'Light', 'Dark'], default: 'System'},
         preferredClimbingTypes: [{ type: String, enum: ['Bouldering', 'Sport', 'Trad'] }],
         preferredGrades: {
             bouldering: { type: String },
@@ -91,6 +94,7 @@ const userSchema = new mongoose.Schema<IUser>({
     requestsSent: [{ type: Schema.Types.ObjectId, ref: 'ConnectionRequest' }], // IDs of users they've sent connection requests to
     requestsReceived: [{ type: Schema.Types.ObjectId, ref: 'ConnectionRequest' }], // IDs of users who have sent them connection requests
     blocked: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    registrationCompleted: { type: Boolean, default: false }
     }, {timestamps: true});
 
 export default mongoose.model<IUser>('User', userSchema);
