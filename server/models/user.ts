@@ -62,7 +62,8 @@ const userSchema = new mongoose.Schema<IUser>({
         },
         coordinates: {
             type: [Number], // [longitude, latitude]
-            index: '2dsphere' // For geospatial queries
+            index: '2dsphere', // For geospatial queries,
+            default: []
         },
         address: { type: String }, // Optional human-readable address
     },

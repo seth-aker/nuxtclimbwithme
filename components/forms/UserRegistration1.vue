@@ -63,8 +63,8 @@
               <SelectValue placeholder="State" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem v-for="(state, index) in states" :key="index" :value="state">
-                {{ state }}
+              <SelectItem v-for="(state, index) in states" :key="index" :value="state.value">
+                {{ state.label }}
               </SelectItem>
             </SelectContent>
           </Select>
@@ -76,12 +76,12 @@
       <FormItem>
         <FormLabel>Zip</FormLabel>
         <FormControl>
-          <Input placeholder="Zip" v-bind="field" type="number" />
+          <Input placeholder="Zip" v-bind="field" />
         </FormControl>
         <FormMessage />
       </FormItem>
     </FormField>
-    <Button type="submit">Submit</Button>
+    <Button type="submit">Next</Button>
   </form>
 </template>
 
@@ -93,7 +93,11 @@ import { states } from '~/assets/lists/states';
 import { toast } from 'vue-sonner';
 
 const userStore = useUserStore();
-
+const initialValues = {
+  firstName: userStore.user.firstName,
+  lastName: userStore.user.lastName,
+  phoneNumber: userStore.user.phoneNumber,
+}
 const schema = toTypedSchema(z.object({
   firstName: z.string(),
   lastName: z.string(),
@@ -102,10 +106,11 @@ const schema = toTypedSchema(z.object({
   addressLine2: z.string().optional(),
   city: z.string().optional(),
   state: z.string().optional(),
-  zip: z.string().optional(),
+  zip: z.string().regex(/^[0-9]{5}$/gm, "Zip code must be 5 numerical digits long").optional()
 }))
 const { handleSubmit, isFieldDirty } = useForm({
-  validationSchema: schema
+  validationSchema: schema,
+  initialValues
 });
 
 const onSubmit = handleSubmit(async (values) => {
@@ -115,7 +120,8 @@ const onSubmit = handleSubmit(async (values) => {
   userStore.user.location.address = `${values.addressLine1}${values.addressLine2 ? `, ${values.addressLine2}` : ''}, ${values.city}, ${values.state} ${values.zip}`;
   await userStore.updateUser(userStore.user);
   if (userStore.error) {
-    toast.error('An error occurred. Please try again.');
+    console.log(userStore.error)
+    toast.error('An error occurred. Please try again. If this persists please contact an administrator');
     userStore.error = null;
   } else {
     navigateTo('/register/page_2');

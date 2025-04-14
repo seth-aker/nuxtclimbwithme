@@ -5,12 +5,12 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if(loggedIn.value) {
         const pinia = usePinia();
         const userStore = useUserStore(pinia);
-        if(!userStore.user){
+        if(!userStore.user._id){
             await userStore.fetchUser();
         }
-        if(userStore.user._id && !userStore.user.registrationCompleted) {
-            return navigateTo('/register/page_1');
-        }
+        // if(userStore.user._id && !userStore.user.registrationCompleted) {
+        //     return navigateTo('/register/page_1');
+        // }
     }
 
 })

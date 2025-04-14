@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+    <FormsUserRegistration2 />
   </div>
 </template>
 

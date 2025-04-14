@@ -40,6 +40,11 @@ export default defineNuxtConfig({
   runtimeConfig: {
     mongodbUri: '',
     dbName: '',
+    s3AccessKeyId: '',
+    s3SecretAccessKey: '',
+    s3Endpoint: '',
+    s3Bucket: '',
+    s3region: '', 
   },
   shadcn: {
     prefix: '',

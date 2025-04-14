@@ -27,15 +27,11 @@ export const useUserStore = defineStore('user', {
             }
         },
         async updateUser(user: IUser) {
-            const {data, error} = await useFetch(`/api/users/${user._id}`, {method: "PUT", body: user});
-            if(error.value) {
-                console.error(error.value);
-                this.error = error.value
-                return error.value
-            }
-            if(data.value) {
-                this.user = data.value;
-                return data.value
+            const response =  await $fetch(`/api/users/${user._id}`, {method: "PUT", body: user});
+            if(response) {
+                this.user = response;
+            } else {
+                this.error = "There was an error updating the user."
             }
         }
     }
