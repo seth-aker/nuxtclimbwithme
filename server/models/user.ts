@@ -1,32 +1,31 @@
 import mongoose, { Schema } from "mongoose"
 
 export interface IUser {
-    _id: mongoose.Types.ObjectId | string;
+    _id: mongoose.Types.ObjectId;
     authId: string
-    username: string;
     email: string;
     phoneNumber?: string,
     firstName?: string;
     lastName?: string;
     profilePicture?: string;
     bio?: string;
-    location?: {
+    location: {
       type: 'Point';
       coordinates: [number, number]; // [longitude, latitude]
       address?: string;
     };
-    climbingExperience?: {
+    climbingExperience: {
       boulderingGrade?: string;
       leadClimbingGrade?: string;
       topRopingGrade?: string;
       yearsClimbing?: number;
       disciplines?: ('Bouldering' | 'Sport' | 'Trad' | 'Aid' | 'Ice' | 'Alpine')[];
     };
-    availability?: {
+    availability: {
       weekdays?: ('Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday')[];
       timeOfDay?: ('Morning' | 'Afternoon' | 'Evening')[];
     };
-    preferences?: {
+    preferences: {
       colorTheme?: 'System' | 'Light' | 'Dark';
       preferredClimbingTypes?: ('Bouldering' | 'Sport' | 'Trad')[];
       preferredGrades?: {
@@ -38,13 +37,13 @@ export interface IUser {
     };
     interests?: string[];
     gearOwned?: string[];
-    connections: mongoose.Types.ObjectId[] | string[]; // Array of User IDs
-    requestsSent:  mongoose.Types.ObjectId[] | string[]; // Array of User IDs
-    requestsReceived:  mongoose.Types.ObjectId[] | string[]; // Array of User IDs
-    blocked: mongoose.Types.ObjectId[] | string[];
+    connections: mongoose.Types.ObjectId[]; // Array of User IDs
+    requestsSent:  mongoose.Types.ObjectId[]; // Array of User IDs
+    requestsReceived:  mongoose.Types.ObjectId[]; // Array of User IDs
+    blocked: mongoose.Types.ObjectId[];
     registrationCompleted: boolean;
-    createdAt?: Date | string;
-    updatedAt?: Date | string;
+    createdAt?: Date;
+    updatedAt?: Date;
   }
 
 const userSchema = new mongoose.Schema<IUser>({

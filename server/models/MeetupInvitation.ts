@@ -1,13 +1,13 @@
 import mongoose, { Schema } from "mongoose"
 
 export interface IMeetupInvitation {
-  _id: mongoose.Types.ObjectId | string
-  senderId: mongoose.Types.ObjectId | string
-  receiverId: mongoose.Types.ObjectId | string
-  meetupId: mongoose.Types.ObjectId | string
+  _id: mongoose.Types.ObjectId
+  senderId: mongoose.Types.ObjectId
+  receiverId: mongoose.Types.ObjectId
+  meetupId: mongoose.Types.ObjectId
   status?: 'Pending' | 'Accepted' | 'Rejected' | 'Withdrawn' | 'Maybe';
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 export const meetupInvitationSchema = new mongoose.Schema<IMeetupInvitation>({

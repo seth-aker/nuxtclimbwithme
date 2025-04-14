@@ -1,6 +1,5 @@
 import { getUserSession } from "nuxt-oidc-auth/runtime/server/utils/session.js";
 import User from "~/server/models/User";
-import type {H3Error} from 'h3'
 export default defineEventHandler(async (event) => {
     // authoriz()
     const session = await getUserSession(event);
@@ -21,13 +20,13 @@ export default defineEventHandler(async (event) => {
             })
         }
         return user.toObject();
-    } catch (e) {
+    } catch (e: any) {
         console.error(e)
-        if(!e?.statusCode || e.statusCode !== 404) {
+        if(!('statusCode' in e) || e.statusCode !== 404) {
             throw e
         }
         const newUser = await User.create({
-            userId: session.userInfo.sub,
+            authId: session.userInfo.sub,
             email: session.userInfo.email,
             phoneNumber: session.userInfo.phoneNumber,
             firstName: session.userInfo.givenName,

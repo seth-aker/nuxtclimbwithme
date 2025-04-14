@@ -1,15 +1,15 @@
 import mongoose, { Schema } from "mongoose";
 export interface IMessageGroup {
-    _id: mongoose.Types.ObjectId | string,
+    _id: mongoose.Types.ObjectId,
     name: string,
     description?: string,
     picture?: string,
-    members: mongoose.Types.ObjectId[] | string[],
-    owners: mongoose.Types.ObjectId[] | string[],
+    members: mongoose.Types.ObjectId[],
+    owners: mongoose.Types.ObjectId[],
     isPrivate: boolean,
     lastMessageAt: Date,
-    createdAt: Date | string,
-    updatedAt: Date | string,
+    createdAt: Date,
+    updatedAt: Date,
 }
 const messageGroupSchema = new mongoose.Schema<IMessageGroup>({
     name: { type: String, required: true }, // Name of the group
