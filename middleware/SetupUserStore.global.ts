@@ -8,9 +8,13 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         if(!userStore.user._id){
             await userStore.fetchUser();
         }
-        // if(userStore.user._id && !userStore.user.registrationCompleted) {
-        //     return navigateTo('/register/page_1');
-        // }
+        if(userStore.user._id && !userStore.user.registrationCompleted) {
+            if(to.path.startsWith('/register')){
+                return
+            } else {
+                return navigateTo('/register/page_1');
+            }
+        }
     }
 
 })

@@ -7,12 +7,7 @@
 </template>
 
 <script setup lang='ts'>
-const userStore = useUserStore();
-onMounted(() => {
-if(!userStore.user.registrationCompleted) {
-  navigateTo('/register/page_1')
-}
-})
+
 </script>
 
 <style>

@@ -15,13 +15,13 @@ export const zodUserSchema = z.object({
     address: z.string().optional(),
   }).optional(),
   climbingExperience: z.object({
-    boulderingGrade: z.string().optional(),
-    leadClimbingGrade: z.string().optional(),
-    topRopingGrade: z.string().optional(),
-    yearsClimbing: z.number().optional(),
-    disciplines: z
-      .array(z.enum(['Bouldering', 'Sport', 'Trad', 'Aid', 'Ice', 'Alpine']))
-      .optional(),
+    disciplines: z.array(z.object({
+      name: z.array(z.enum(['Bouldering', 'Sport', 'Trad', 'Aid', 'Ice', 'Alpine']))
+        .optional(),
+      grade: z.string().optional(),
+      yearsExperience: z.number().positive().optional(),
+      certified: z.boolean().optional()
+    })).optional() 
   }).optional(),
   availability: z.object({
     weekdays: z

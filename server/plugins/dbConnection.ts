@@ -1,4 +1,11 @@
 import mongoose from "mongoose"
+
+declare module 'h3' {
+  interface H3EventContext {
+      mongoose: mongoose.Connection
+  }
+}
+
 export default defineNitroPlugin(async (nitroApp) => {
     const config = useRuntimeConfig();
     const mongodbUri = config.mongodbUri;

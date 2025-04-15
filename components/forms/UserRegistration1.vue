@@ -81,7 +81,11 @@
         <FormMessage />
       </FormItem>
     </FormField>
-    <Button type="submit">Next</Button>
+    <Button type="submit" v-if="!loading">Next</Button>
+    <Button v-else>
+      <LoadingSpinner :stroke-width="2" :circumference="40" color="#FFFFFF" disabled/>
+    </Button> 
+    <Button variant="outline" @click="navigateTo('/register/page_2')">Skip</Button>
   </form>
 </template>
 
@@ -91,7 +95,7 @@ import { toTypedSchema } from '@vee-validate/zod';
 import * as z from 'zod';
 import { states } from '~/assets/lists/states';
 import { toast } from 'vue-sonner';
-
+const loading = ref(false);
 const userStore = useUserStore();
 const initialValues = {
   firstName: userStore.user.firstName,

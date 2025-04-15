@@ -15,11 +15,12 @@ export interface IUser {
       address?: string;
     };
     climbingExperience: {
-      boulderingGrade?: string;
-      leadClimbingGrade?: string;
-      topRopingGrade?: string;
-      yearsClimbing?: number;
-      disciplines?: ('Bouldering' | 'Sport' | 'Trad' | 'Aid' | 'Ice' | 'Alpine')[];
+      disciplines: {
+        name: 'Bouldering' | 'Sport' | 'Top Rope' | 'Trad' | 'Aid' | 'Ice' | 'Alpine',
+        grade?: string,
+        yearsExperience?: number,
+        certified?: boolean
+      }[]
     };
     availability: {
       weekdays?: ('Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday')[];
@@ -68,11 +69,12 @@ const userSchema = new mongoose.Schema<IUser>({
         address: { type: String }, // Optional human-readable address
     },
     climbingExperience: {
-        boulderingGrade: { type: String }, // e.g., "V4", "6B"
-        leadClimbingGrade: { type: String }, // e.g., "5.10a", "6a+"
-        topRopingGrade: { type: String }, // e.g., "5.9"
-        yearsClimbing: { type: Number },
-        disciplines: [{ type: String, enum: ['Bouldering', 'Sport', 'Trad', 'Aid', 'Ice', 'Alpine'] }],
+        disciplines: [{
+          name: { type: String, enum: ['Bouldering', 'Sport', 'Top Rope', 'Trad', 'Aid', 'Ice', 'Alpine'] },
+          grade: { type: String },
+          yearsExperience: { type: Number },
+          certified: { type: Boolean } 
+        }],
     },
     availability: {
         weekdays: [{ type: String, enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] }],

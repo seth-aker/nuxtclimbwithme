@@ -10,7 +10,7 @@ export default async function(event: H3Event<EventHandlerRequest>) {
             message: "User not logged in."
         })
     }
-    const user = await User.findOne({userId: session.userInfo.sub}).exec();
+    const user = await User.findOne({authId: session.userInfo.sub}).exec();
     if(!user) {
         throw createError({
             statusCode: 404,

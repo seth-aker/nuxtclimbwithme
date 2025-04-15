@@ -17,6 +17,7 @@ export const useUserStore = defineStore('user', {
     }),
     actions: {
         async fetchUser() {
+            this.error = null;
             const {data, error} = await useFetch('/api/profile', {method: "GET"});
             if(error.value) {
                 console.error(error.value);
@@ -27,11 +28,19 @@ export const useUserStore = defineStore('user', {
             }
         },
         async updateUser(user: IUser) {
+            this.error = null;
             const response =  await $fetch(`/api/users/${user._id}`, {method: "PUT", body: user});
             if(response) {
                 this.user = response;
             } else {
                 this.error = "There was an error updating the user."
+            }
+        },
+        async updateProfilePicture(formData: FormData) {
+            this.error = null;
+            const response = await $fetch("/api/profile/image", {method: "POST", body: formData})
+            if(response.status !== 200) {
+                this.error = "There was an error updating the profile image."
             }
         }
     }

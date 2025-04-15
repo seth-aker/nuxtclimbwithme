@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex flex-col items-center justify-center">
     <FormsUserRegistration1 />
   </div>
 </template>

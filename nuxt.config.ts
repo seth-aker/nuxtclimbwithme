@@ -44,7 +44,7 @@ export default defineNuxtConfig({
     s3SecretAccessKey: '',
     s3Endpoint: '',
     s3Bucket: '',
-    s3region: '', 
+    s3Region: '', 
   },
   shadcn: {
     prefix: '',
