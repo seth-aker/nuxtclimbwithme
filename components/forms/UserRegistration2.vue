@@ -23,7 +23,7 @@
     <Button v-else>
       <LoadingSpinner :stroke-width="2" :circumference="40" color="#FFFFFF" disabled />
     </Button>
-    <Button variant="outline" @click="navigateTo('/register/page_3')">Skip</Button>
+    <Button variant="outline" @click.prevent="navigateTo('/register/page_3')">Skip</Button>
   </form>
 </template>
 

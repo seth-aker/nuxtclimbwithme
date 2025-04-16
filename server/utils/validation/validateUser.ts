@@ -10,20 +10,22 @@ export const zodUserSchema = z.object({
   profilePicture: z.string().optional(),
   bio: z.string().optional(),
   location: z.object({
-    type: z.literal('Point').optional(),
-    coordinates: z.tuple([z.number(), z.number()]).optional(), // [longitude, latitude]
+    coordinates: z.object({
+      latitude: z.number(),
+      longitude: z.number()
+    }).optional(),
+    geohash: z.string().optional(),
     address: z.string().optional(),
   }).optional(),
   climbingExperience: z.object({
     disciplines: z.array(z.object({
-      name: z.array(z.enum(['Bouldering', 'Sport', 'Trad', 'Aid', 'Ice', 'Alpine']))
-        .optional(),
+      name: z.array(z.enum(['Bouldering', 'Sport','Top Rope', 'Trad', 'Aid', 'Ice', 'Alpine'])),
       grade: z.string().optional(),
       yearsExperience: z.number().positive().optional(),
       certified: z.boolean().optional()
     })).optional() 
   }).optional(),
-  availability: z.object({
+  availability: z.array(z.object({
     weekdays: z
       .array(
         z.enum([
@@ -40,19 +42,16 @@ export const zodUserSchema = z.object({
     timeOfDay: z
       .array(z.enum(['Morning', 'Afternoon', 'Evening']))
       .optional(),
-  }).optional(),
+  }).optional()),
   preferences: z.object({
+    colorTheme: z.enum(['System', 'Light', 'Dark']).optional(),
     preferredClimbingTypes: z
-      .array(z.enum(['Bouldering', 'Sport', 'Trad']))
-      .optional(),
-    preferredGrades: z
-      .object({
-        bouldering: z.string().optional(),
-        lead: z.string().optional(),
-      })
-      .optional(),
-    willingToTravel: z.boolean().optional(),
-    searchRadius: z.number().optional(),
+      .array(z.object({
+          name: z.enum(['Bouldering', 'Sport', 'Top Rope', 'Trad', 'Aid', 'Ice', 'Alpine']),
+          preferredGrade: z.string().optional(),
+          certified: z.boolean().optional()
+      })).optional(),
+    searchRadius: z.number().nonnegative().optional(),
   }).optional(),
   interests: z.array(z.string()).optional(),
   gearOwned: z.array(z.string()).optional(),

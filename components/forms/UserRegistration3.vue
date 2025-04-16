@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit="submit">
     <Card v-for="(field, index) in fields" :key="field.key">
       <CardHeader>
         <Button variant="destructive" @click="remove(index)">X</Button>
@@ -52,7 +52,13 @@
       </FormField>
     </Card>
     <Button @click.prevent="push({ name: '', grade: '', yearsExperience: 0, certified: false })">Add Discipline</Button>
-
+    <div>
+      <Button type="submit" v-if="!loading">Next</Button>
+      <Button v-else>
+        <LoadingSpinner :stroke-width="2" :circumference="40" color="#FFFFFF" disabled/>
+      </Button> 
+    <Button variant="outline" @click.prevent="navigateTo('/register/page_4')">Skip</Button>
+    </div>
   </form>
 </template>
 
@@ -78,6 +84,7 @@ const { handleSubmit } = useForm({
 const { fields, push, remove } = useFieldArray('disciplines');
 
 const submit = handleSubmit(async (values) => {
+  console.log(values)
   loading.value = true;
   userStore.user.climbingExperience.disciplines = values;
   await userStore.updateUser(userStore.user);

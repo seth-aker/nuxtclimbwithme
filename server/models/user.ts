@@ -10,8 +10,11 @@ export interface IUser {
     profilePicture?: string;
     bio?: string;
     location: {
-      type: 'Point';
-      coordinates: [number, number]; // [longitude, latitude]
+      coordinates?: {
+        latitude: number,
+        longitude: number,
+      },
+      geohash?: string
       address?: string;
     };
     climbingExperience: {
@@ -25,15 +28,14 @@ export interface IUser {
     availability: {
       weekdays?: ('Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday')[];
       timeOfDay?: ('Morning' | 'Afternoon' | 'Evening')[];
-    };
+    }[];
     preferences: {
       colorTheme?: 'System' | 'Light' | 'Dark';
-      preferredClimbingTypes?: ('Bouldering' | 'Sport' | 'Trad')[];
-      preferredGrades?: {
-        bouldering?: string;
-        lead?: string;
-      };
-      willingToTravel?: boolean;
+      preferredClimbingTypes?: {
+        name: 'Bouldering' | 'Sport' | 'Top Rope' | 'Trad' | 'Aid' | 'Ice' | 'Alpine',
+        preferredGrade?: string,
+        certified?: boolean
+      }[];
       searchRadius?: number;
     };
     interests?: string[];
@@ -56,16 +58,11 @@ const userSchema = new mongoose.Schema<IUser>({
     profilePicture: { type: String }, // URL or path to profile image
     bio: { type: String },
     location: {
-        type: {
-            type: String, // Don't do `{ type: String }` here
-            enum: ['Point'], // 'Point' is the only allowed type for GeoJSON Point
-            default: 'Point'
-        },
         coordinates: {
-            type: [Number], // [longitude, latitude]
-            index: '2dsphere', // For geospatial queries,
-            default: []
+           latitude: Number,
+           longitude: Number,
         },
+        geohash: String,
         address: { type: String }, // Optional human-readable address
     },
     climbingExperience: {
@@ -76,18 +73,17 @@ const userSchema = new mongoose.Schema<IUser>({
           certified: { type: Boolean } 
         }],
     },
-    availability: {
+    availability: [{
         weekdays: [{ type: String, enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] }],
         timeOfDay: [{ type: String, enum: ['Morning', 'Afternoon', 'Evening'] }],
-    },
+    }],
     preferences: {
         colorTheme: { type: String, enum: ['System', 'Light', 'Dark'], default: 'System'},
-        preferredClimbingTypes: [{ type: String, enum: ['Bouldering', 'Sport', 'Trad'] }],
-        preferredGrades: {
-            bouldering: { type: String },
-            lead: { type: String },
-        },
-        willingToTravel: { type: Boolean, default: false },
+        preferredClimbingTypes: [{
+          name: {type: String, enum: ['Bouldering', 'Sport', 'Top Rope', 'Trad', 'Aid', 'Ice', 'Alpine']},
+          preferredGrade: String,
+          certified: Boolean
+        }],
         searchRadius: { type: Number, default: 50 }, 
     },
     interests: [{ type: String }], // Other interests beyond climbing
