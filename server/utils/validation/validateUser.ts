@@ -19,33 +19,24 @@ export const zodUserSchema = z.object({
   }).optional(),
   climbingExperience: z.object({
     disciplines: z.array(z.object({
-      name: z.array(z.enum(['Bouldering', 'Sport','Top Rope', 'Trad', 'Aid', 'Ice', 'Alpine'])),
+      name: z.enum(['Bouldering', 'Sport','Top Rope', 'Trad', 'Aid', 'Ice', 'Alpine']),
       grade: z.string().optional(),
       yearsExperience: z.number().positive().optional(),
       certified: z.boolean().optional()
     })).optional() 
   }).optional(),
-  availability: z.array(z.object({
-    weekdays: z
-      .array(
-        z.enum([
-          'Monday',
-          'Tuesday',
-          'Wednesday',
-          'Thursday',
-          'Friday',
-          'Saturday',
-          'Sunday',
-        ])
-      )
-      .optional(),
-    timeOfDay: z
-      .array(z.enum(['Morning', 'Afternoon', 'Evening']))
-      .optional(),
-  }).optional()),
+  availability: z.object({
+    monday: z.array(z.enum(['Morning', 'Afternoon', 'Evening'])),
+    tuesday: z.array(z.enum(['Morning', 'Afternoon', 'Evening'])),
+    wednesday: z.array(z.enum(['Morning', 'Afternoon', 'Evening'])),
+    thursday: z.array(z.enum(['Morning', 'Afternoon', 'Evening'])),
+    friday: z.array(z.enum(['Morning', 'Afternoon', 'Evening'])),
+    saturday: z.array(z.enum(['Morning', 'Afternoon', 'Evening'])),
+    sunday: z.array(z.enum(['Morning', 'Afternoon', 'Evening'])),
+  }).optional(),
   preferences: z.object({
     colorTheme: z.enum(['System', 'Light', 'Dark']).optional(),
-    preferredClimbingTypes: z
+    openToClimbingTypes: z
       .array(z.object({
           name: z.enum(['Bouldering', 'Sport', 'Top Rope', 'Trad', 'Aid', 'Ice', 'Alpine']),
           preferredGrade: z.string().optional(),

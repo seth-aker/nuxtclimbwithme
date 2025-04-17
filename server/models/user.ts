@@ -26,12 +26,17 @@ export interface IUser {
       }[]
     };
     availability: {
-      weekdays?: ('Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday')[];
-      timeOfDay?: ('Morning' | 'Afternoon' | 'Evening')[];
-    }[];
+      monday: ('Morning' | 'Afternoon' | 'Evening')[];
+      tuesday: ('Morning' | 'Afternoon' | 'Evening')[];
+      wednesday: ('Morning' | 'Afternoon' | 'Evening')[];
+      thursday: ('Morning' | 'Afternoon' | 'Evening')[];
+      friday: ('Morning' | 'Afternoon' | 'Evening')[];
+      saturday: ('Morning' | 'Afternoon' | 'Evening')[];
+      sunday: ('Morning' | 'Afternoon' | 'Evening')[];
+    };
     preferences: {
       colorTheme?: 'System' | 'Light' | 'Dark';
-      preferredClimbingTypes?: {
+      openToClimbingTypes?: {
         name: 'Bouldering' | 'Sport' | 'Top Rope' | 'Trad' | 'Aid' | 'Ice' | 'Alpine',
         preferredGrade?: string,
         certified?: boolean
@@ -73,13 +78,18 @@ const userSchema = new mongoose.Schema<IUser>({
           certified: { type: Boolean } 
         }],
     },
-    availability: [{
-        weekdays: [{ type: String, enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] }],
-        timeOfDay: [{ type: String, enum: ['Morning', 'Afternoon', 'Evening'] }],
-    }],
+    availability: {
+      monday: [{ type: String, enum: ['Morning', 'Afternoon', 'Evening'] }],
+      tuesday: [{ type: String, enum: ['Morning', 'Afternoon', 'Evening'] }],
+      wednesday: [{ type: String, enum: ['Morning', 'Afternoon', 'Evening'] }],
+      thursday: [{ type: String, enum: ['Morning', 'Afternoon', 'Evening'] }],
+      friday: [{ type: String, enum: ['Morning', 'Afternoon', 'Evening'] }],
+      saturday: [{ type: String, enum: ['Morning', 'Afternoon', 'Evening'] }],
+      sunday: [{ type: String, enum: ['Morning', 'Afternoon', 'Evening'] }]
+    },
     preferences: {
         colorTheme: { type: String, enum: ['System', 'Light', 'Dark'], default: 'System'},
-        preferredClimbingTypes: [{
+        openToClimbingTypes: [{
           name: {type: String, enum: ['Bouldering', 'Sport', 'Top Rope', 'Trad', 'Aid', 'Ice', 'Alpine']},
           preferredGrade: String,
           certified: Boolean

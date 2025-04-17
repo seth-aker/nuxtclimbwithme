@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-x-hidden">
     <AppNav />
-    <NuxtPage />
+    <NuxtPage class="pb-12" />
     <Toaster />
   </div>
 </template>

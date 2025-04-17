@@ -5,7 +5,6 @@
         <FormControl>
           <Input multiple type="file"
             @change="(e: FileUploadEvent) => setFieldValue('profilePicture', e.target?.files?.[0])" />
-          <!-- <input type="file" multiple  @change="(e: Event) => setFieldValue('profilePicture', e.target?.files?.[0])"/> -->
         </FormControl>
         <FormMessage />
       </FormItem>

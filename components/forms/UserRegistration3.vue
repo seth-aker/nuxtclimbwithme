@@ -41,17 +41,25 @@
           </FormControl>
         </FormItem>
       </FormField>
-      <FormField v-if="(field.value as any).name !== 'Bouldering'" :name="`disciplines[${index}].certified`"
-        v-slot="{ componentField }">
+      <FormField v-if="field.value.name !== 'Bouldering'" type="checkbox" :value="field.value.certified" :unchecked-value="false" :name="`disciplines[${index}].certified`" v-slot="{ componentField, setValue }">
         <FormItem class="flex flex-row">
           <FormControl>
-            <Checkbox v-bind="componentField" />
+            <Checkbox :model-value="componentField.modelValue" @update:model-value="(value) => setValue(value)" />
           </FormControl>
           <FormLabel>Belay Certified</FormLabel>
         </FormItem>
       </FormField>
+      <FormField type="checkbox" :value="field.value.certified" :unchecked-value="false" :name="`disciplines[${index}].openToClimbing`" v-slot="{ componentField, setValue }">
+        <FormItem class="flex flex-row">
+          <FormLabel>Open to climbing</FormLabel>
+          <FormDescription>Check the box if you want to be included other climbers' searches in this discipline</FormDescription>
+          <FormControl>
+            <Checkbox :model-value="componentField.modelValue" @update:model-value="(value) => setValue(value)" />
+          </FormControl>
+        </FormItem>
+      </FormField>
     </Card>
-    <Button @click.prevent="push({ name: '', grade: '', yearsExperience: 0, certified: false })">Add Discipline</Button>
+    <Button @click.prevent="push({ name: '', grade: '', yearsExperience: 0, certified: false , openToClimbing: false})">Add Discipline</Button>
     <div>
       <Button type="submit" v-if="!loading">Next</Button>
       <Button v-else>
@@ -69,30 +77,50 @@ import { useFieldArray, useForm } from 'vee-validate';
 import { climbingDisciplines } from '~/assets/lists/climbingDisciplines';
 import { toast } from 'vue-sonner';
 const loading = ref(false);
+
 const userStore = useUserStore();
-const schema = toTypedSchema(z.array(z.object({
-  name: z.enum(['Bouldering', 'Sport', 'Top Rope', 'Trad', 'Aid', 'Ice', 'Alpine']),
-  grade: z.string().optional(),
-  yearsExperience: z.number().optional(),
-  certified: z.boolean().default(false)
-})))
+const schema = toTypedSchema(z.object({
+  disciplines: z.array(z.object({
+    name: z.enum(['Bouldering', 'Sport', 'Top Rope', 'Trad', 'Aid', 'Ice', 'Alpine']),
+    grade: z.string().optional(),
+    yearsExperience: z.number().optional(),
+    certified: z.boolean().optional(),
+    openToClimbing: z.boolean().optional()
+}))}))
 
 const { handleSubmit } = useForm({
   validationSchema: schema,
-  initialValues: userStore.user.climbingExperience.disciplines
+  initialValues: userStore.user.climbingExperience
 })
-const { fields, push, remove } = useFieldArray('disciplines');
+const { fields, push, remove } = useFieldArray<{name: string, grade: string, yearsExperience: number, certified: boolean, openToClimbing: boolean}>('disciplines');
 
 const submit = handleSubmit(async (values) => {
   console.log(values)
   loading.value = true;
-  userStore.user.climbingExperience.disciplines = values;
+  userStore.user.climbingExperience.disciplines = values.disciplines.map((each) => {
+    const discipline = {
+      name: each.name,
+      grade: each.grade,
+      yearsExperience: each.yearsExperience,
+      certified: each.certified
+    }
+    return discipline
+  });
+  userStore.user.preferences.openToClimbingTypes = values.disciplines.filter(each => each.openToClimbing).map((each => {
+      const type = {
+        name: each.name,
+        preferredGrade: each.grade,
+        certified: each.certified
+      }
+      return type
+  }))
   await userStore.updateUser(userStore.user);
   if (userStore.error) {
     toast.error(userStore.error);
   } else {
     navigateTo('/register/page_4');
   }
+  loading.value = false
 })
 </script>
 
