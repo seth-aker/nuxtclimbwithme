@@ -21,6 +21,22 @@
         </FormField>
       </FormItem>
     </FormField>
+    <FormField name="gearOwned" v-slot="{componentField}">
+      <FormItem>
+        <FormLabel>Gear Owned</FormLabel>
+        <FormDescription>List the types of year that you have. E.g. Cams, 70m rope, harness, bouldering pad x2</FormDescription>
+        <FormControl>
+          <TagsInput :model-value="componentField.modelValue" @update:model-value="componentField['onUpdate:modelValue']">
+            <TagsInputItem v-for="item in componentField.modelValue" :key="item" :value="item" >
+              <TagsInputItemText />
+              <TagsInputItemDelete />
+            </TagsInputItem>
+            
+            <TagsInputInput placeholder="Gear..." />
+          </TagsInput>
+        </FormControl>
+      </FormItem>
+    </FormField>
     <div>
       <Button type="submit" v-if="!loading">Next</Button>
       <Button v-else>
