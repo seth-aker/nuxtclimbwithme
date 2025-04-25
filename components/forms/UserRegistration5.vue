@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit="submit">
     <FormField name="interests" v-slot="{ componentField }">
       <FormItem>
         <FormLabel>Other Interests</FormLabel>
@@ -11,12 +11,17 @@
               <TagsInputItemDelete />
             </TagsInputItem>
             
-            <TagsInputInput placeholder="Interests..." />
+            <TagsInputInput placeholder="Other interests..." />
           </TagsInput>
         </FormControl>
       </FormItem>
     </FormField>
-    
+    <div>
+      <Button type="submit" v-if="!loading">Finish</Button>
+      <Button v-else disabled>
+        <LoadingSpinner :stroke-width="2" :circumference="40" color="#FFFFFF" />
+      </Button> 
+    </div>
   </form>
 </template>
 
@@ -30,7 +35,6 @@ const loading = ref(false);
 
 const schema = toTypedSchema(z.object({
   intrests: z.array(z.string()).optional(),
-  gearOwned: z.array(z.string()).optional()
 }))
 
 const { handleSubmit } = useForm({
@@ -40,7 +44,8 @@ const { handleSubmit } = useForm({
 const submit = handleSubmit(async (values) => {
   loading.value = true;
   userStore.user.interests = values.intrests
-  userStore.user.gearOwned = values.gearOwned
+  userStore.user.registrationCompleted = true;
+  console.log(userStore.user.registrationCompleted)
   await userStore.updateUser(userStore.user);
   if(userStore.error) {
     toast.error(userStore.error)

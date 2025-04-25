@@ -7,7 +7,11 @@
 </template>
 
 <script setup lang='ts'>
-
+const userStore = useUserStore()
+const colorMode = useColorMode()
+watch(userStore.user.preferences, (newValue) => {
+  colorMode.preference = newValue.colorTheme ?? 'system'
+})
 </script>
 
 <style>

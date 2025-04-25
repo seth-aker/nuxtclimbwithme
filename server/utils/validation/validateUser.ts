@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { object, z } from "zod";
 import { objectIdSchema } from "./validateObjectId";
 
 export const zodUserSchema = z.object({
@@ -35,7 +35,7 @@ export const zodUserSchema = z.object({
     sunday: z.array(z.enum(['Morning', 'Afternoon', 'Evening'])),
   }).optional(),
   preferences: z.object({
-    colorTheme: z.enum(['System', 'Light', 'Dark']).optional(),
+    colorTheme: z.enum(['system', 'light', 'dark']),
     openToClimbingTypes: z
       .array(z.object({
           name: z.enum(['Bouldering', 'Sport', 'Top Rope', 'Trad', 'Aid', 'Ice', 'Alpine']),
@@ -46,9 +46,11 @@ export const zodUserSchema = z.object({
   }).optional(),
   interests: z.array(z.string()).optional(),
   gearOwned: z.array(z.string()).optional(),
-  connections: z.array(objectIdSchema).optional(),
-  requestsSent: z.array(objectIdSchema).optional(),
-  requestsReceived: z.array(objectIdSchema).optional(),
+  connections: z.array(objectIdSchema),
+  requestsSent: z.array(objectIdSchema),
+  requestsReceived: z.array(objectIdSchema),
+  blocked: z.array(objectIdSchema),
+  registrationCompleted: z.boolean().default(false),
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
 });

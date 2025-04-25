@@ -2,6 +2,9 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  colorMode: {
+    classSuffix: ''
+  },
   compatibilityDate: '2024-11-01',
   css: ['~/assets/css/main.css'],
   devtools: { enabled: true },
@@ -13,7 +16,8 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     'shadcn-nuxt',
     'nuxt-oidc-auth',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@nuxtjs/color-mode'
   ],
   oidc: {
     defaultProvider: "auth0",

@@ -35,7 +35,7 @@ export interface IUser {
       sunday: ('Morning' | 'Afternoon' | 'Evening')[];
     };
     preferences: {
-      colorTheme?: 'System' | 'Light' | 'Dark';
+      colorTheme: 'system' | 'light' | 'dark';
       openToClimbingTypes?: {
         name: 'Bouldering' | 'Sport' | 'Top Rope' | 'Trad' | 'Aid' | 'Ice' | 'Alpine',
         preferredGrade?: string,
@@ -88,7 +88,7 @@ const userSchema = new mongoose.Schema<IUser>({
       sunday: [{ type: String, enum: ['Morning', 'Afternoon', 'Evening'] }]
     },
     preferences: {
-        colorTheme: { type: String, enum: ['System', 'Light', 'Dark'], default: 'System'},
+        colorTheme: { type: String, enum: ['system', 'light', 'dark'], default: 'system'},
         openToClimbingTypes: [{
           name: {type: String, enum: ['Bouldering', 'Sport', 'Top Rope', 'Trad', 'Aid', 'Ice', 'Alpine']},
           preferredGrade: String,

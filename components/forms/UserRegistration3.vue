@@ -62,8 +62,8 @@
     <Button @click.prevent="push({ name: '', grade: '', yearsExperience: 0, certified: false , openToClimbing: false})">Add Discipline</Button>
     <div>
       <Button type="submit" v-if="!loading">Next</Button>
-      <Button v-else>
-        <LoadingSpinner :stroke-width="2" :circumference="40" color="#FFFFFF" disabled/>
+      <Button v-else disabled>
+        <LoadingSpinner :stroke-width="2" :circumference="40" color="#FFFFFF" />
       </Button> 
     <Button variant="outline" @click.prevent="navigateTo('/register/page_4')">Skip</Button>
     </div>

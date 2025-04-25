@@ -24,7 +24,7 @@
     <FormField name="gearOwned" v-slot="{componentField}">
       <FormItem>
         <FormLabel>Gear Owned</FormLabel>
-        <FormDescription>List the types of year that you have. E.g. Cams, 70m rope, harness, bouldering pad x2</FormDescription>
+        <FormDescription>List the types of year that you have. E.g. Cams, 70m rope etc.</FormDescription>
         <FormControl>
           <TagsInput :model-value="componentField.modelValue" @update:model-value="componentField['onUpdate:modelValue']">
             <TagsInputItem v-for="item in componentField.modelValue" :key="item" :value="item" >
@@ -39,8 +39,8 @@
     </FormField>
     <div>
       <Button type="submit" v-if="!loading">Next</Button>
-      <Button v-else>
-        <LoadingSpinner :stroke-width="2" :circumference="40" color="#FFFFFF" disabled/>
+      <Button v-else disabled>
+        <LoadingSpinner :stroke-width="2" :circumference="40" color="#FFFFFF" />
       </Button> 
     <Button variant="outline" @click.prevent="navigateTo('/register/page_5')">Skip</Button>
     </div>
@@ -90,6 +90,7 @@ const submit = handleSubmit(async (values) => {
   loading.value = true;
   console.log(values)
   userStore.user.availability = values.availability;
+  userStore.user.gearOwned = values.gearOwned
   await userStore.updateUser(userStore.user);
   if(userStore.error) {
     toast.error(userStore.error)

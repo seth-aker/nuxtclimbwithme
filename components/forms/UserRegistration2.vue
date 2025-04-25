@@ -19,8 +19,8 @@
       </FormItem>
     </FormField>
     <Button type="submit" v-if="!loading">Next</Button>
-    <Button v-else>
-      <LoadingSpinner :stroke-width="2" :circumference="40" color="#FFFFFF" disabled />
+    <Button v-else disabled>
+      <LoadingSpinner :stroke-width="2" :circumference="40" color="#FFFFFF"  />
     </Button>
     <Button variant="outline" @click.prevent="navigateTo('/register/page_3')">Skip</Button>
   </form>
