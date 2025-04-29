@@ -1,4 +1,4 @@
-import { object, z } from "zod";
+import { z } from "zod";
 import { objectIdSchema } from "./validateObjectId";
 
 export const zodUserSchema = z.object({
@@ -46,6 +46,7 @@ export const zodUserSchema = z.object({
   }).optional(),
   interests: z.array(z.string()).optional(),
   gearOwned: z.array(z.string()).optional(),
+  communitiesJoined: z.array(objectIdSchema),
   connections: z.array(objectIdSchema),
   requestsSent: z.array(objectIdSchema),
   requestsReceived: z.array(objectIdSchema),

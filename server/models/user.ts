@@ -1,7 +1,7 @@
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Schema, Types } from "mongoose"
 
 export interface IUser {
-    _id: mongoose.Types.ObjectId;
+    _id: Types.ObjectId;
     authId: string
     email: string;
     phoneNumber?: string,
@@ -45,10 +45,11 @@ export interface IUser {
     };
     interests?: string[];
     gearOwned?: string[];
-    connections: mongoose.Types.ObjectId[]; // Array of User IDs
-    requestsSent:  mongoose.Types.ObjectId[]; // Array of User IDs
-    requestsReceived:  mongoose.Types.ObjectId[]; // Array of User IDs
-    blocked: mongoose.Types.ObjectId[];
+    communitiesJoined: Types.ObjectId
+    connections: Types.ObjectId[]; // Array of User IDs
+    requestsSent:  Types.ObjectId[]; // Array of User IDs
+    requestsReceived:  Types.ObjectId[]; // Array of User IDs
+    blocked: Types.ObjectId[];
     registrationCompleted: boolean;
     createdAt?: Date;
     updatedAt?: Date;
@@ -98,6 +99,7 @@ const userSchema = new mongoose.Schema<IUser>({
     },
     interests: [{ type: String }], // Other interests beyond climbing
     gearOwned: [{ type: String }], // List of climbing gear they own
+    communitiesJoined: [{type: Schema.Types.ObjectId, ref: 'Community'}],
     connections: [{ type: Schema.Types.ObjectId, ref: 'User' }], // IDs of users they've connected with (optional)
     requestsSent: [{ type: Schema.Types.ObjectId, ref: 'ConnectionRequest' }], // IDs of users they've sent connection requests to
     requestsReceived: [{ type: Schema.Types.ObjectId, ref: 'ConnectionRequest' }], // IDs of users who have sent them connection requests

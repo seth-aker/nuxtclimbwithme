@@ -1,10 +1,16 @@
 <template>
   <div class="flex flex-col items-center justify-center">
-    <FormsUserRegistration1 />
+    <FormsRegistrationPage1 />
   </div>
 </template>
 
 <script lang="ts" setup>
+definePageMeta({
+  pageTransition: {
+    name: 'slide-left',
+    mode: 'out-in'
+  },
+})
 
 </script>
 
