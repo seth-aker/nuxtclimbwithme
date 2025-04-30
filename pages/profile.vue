@@ -24,7 +24,7 @@
           <span class="font-bold">Phone Number: </span><span>{{ userStore.user.phoneNumber }}</span>
         </div>
         <div>
-          <span class="font-bold">Address: </span><span>{{ userStore.user.location.address }}</span>
+          <span class="font-bold">Address: </span><span>{{ userStore.user.location?.address }}</span>
         </div>
         <div>
           <span class="font-bold">Bio: </span><span>{{ userStore.user.bio }}</span>

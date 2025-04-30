@@ -1,5 +1,5 @@
 import mongoose, { Schema, Types } from "mongoose";
-import { communityLocationSchema, ICommunityLocation } from "./communityLocation";
+import { communityLocationSchema, ICommunityLocation } from "./CommunityLocation";
 export interface ICommunity {
     _id: Types.ObjectId,
     location?: ICommunityLocation,

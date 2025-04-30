@@ -3,12 +3,11 @@ export interface ICommunityLocation {
     _id: Types.ObjectId,
     name?: string,
     description?: string,
-    coordinates?: {
-        latitude: number,
-        longitude: number
-    },
+    geoJSON?: {
+        type: 'Point',
+        coordinates: [number, number]
+    }
     address?: string,
-    geohash?: string,
     hours?: {
         openAtTime: string,
         openDurationHours: string,
@@ -22,12 +21,11 @@ export const communityLocationSchema = new mongoose.Schema({
     _id: Schema.Types.ObjectId,
     name: String,
     description: String,
-    coordinates: {
-        latitude: Number,
-        longitude: Number,
+    geoJSON: {
+        type: {type: String, default: 'Point', immutable: true},
+        coordinates: [Number, Number]
     },
     address: { type: String },
-    geohash: String,
     hours: {
         openAtTime: String,
         openDurationHours: Number

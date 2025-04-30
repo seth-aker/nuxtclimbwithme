@@ -5,6 +5,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useGeolocation } from '@vueuse/core';
 definePageMeta({
   pageTransition: {
     name: 'slide-left',
@@ -12,5 +13,19 @@ definePageMeta({
   },
   middleware: 'page-transition'
 })
+const {coords, locatedAt, error, pause, resume} = useGeolocation();
+const userStore = useUserStore();
 
+watch(locatedAt, async () => {
+  if(error.value) {
+    userStore.user.location.geoJSON = undefined;
+  } else if(coords.value.latitude && coords.value.longitude) {
+    console.log('setting location')
+    if(!userStore.user.location) {
+      userStore.user.location = {geoJSON: undefined}
+    }
+    userStore.user.location.geoJSON = {type: "Point", coordinates: [coords.value.latitude, coords.value.longitude]};
+  }
+  await userStore.updateUser(userStore.user);
+}, {once: true})
 </script>

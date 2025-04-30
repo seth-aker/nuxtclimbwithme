@@ -10,11 +10,11 @@ export interface IUser {
     profilePicture?: string;
     bio?: string;
     location: {
-      coordinates?: {
-        latitude: number,
-        longitude: number,
+      geoJSON?: {
+        type: "Point",
+        coordinates: [number, number]
       },
-      geohash?: string
+      locatedAt?: number,
       address?: string;
     };
     climbingExperience: {
@@ -45,7 +45,7 @@ export interface IUser {
     };
     interests?: string[];
     gearOwned?: string[];
-    communitiesJoined: Types.ObjectId
+    communitiesJoined: Types.ObjectId[]
     connections: Types.ObjectId[]; // Array of User IDs
     requestsSent:  Types.ObjectId[]; // Array of User IDs
     requestsReceived:  Types.ObjectId[]; // Array of User IDs
@@ -64,11 +64,11 @@ const userSchema = new mongoose.Schema<IUser>({
     profilePicture: { type: String }, // URL or path to profile image
     bio: { type: String },
     location: {
-        coordinates: {
-           latitude: Number,
-           longitude: Number,
+        geoJSON: {
+          type: { type: String, default: 'Point', immutable: true},
+          coordinates: {type: [Number, Number], default: undefined},
         },
-        geohash: String,
+        locatedAt: Number,
         address: { type: String }, // Optional human-readable address
     },
     climbingExperience: {

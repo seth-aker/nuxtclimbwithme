@@ -5,12 +5,11 @@ export const zodCommunityLocationSchema = z.object({
   _id: objectIdSchema,
   name: z.string(),
   description: z.string().optional(),
-  coordinates: z.object({
-    latitude: z.number(),
-    longitude: z.number()
+  geoJSON: z.object({
+    type: z.string().refine((string) => string === 'Point'),
+    coordinates: z.tuple([z.number(), z.number()])
   }).optional(),
   address: z.string().optional(),
-  geohash: z.string().optional(),
   hours: z.object({
     openAtTime: z.string(),
     openDurationHours: z.string()

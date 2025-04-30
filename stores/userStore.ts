@@ -1,7 +1,8 @@
 import type { IUser as IMongoUser } from "~/server/models/User";
 
-export interface IUser extends Omit<IMongoUser, '_id' | 'connections' | 'requestsSent' | 'requestsReceived' | 'blocked' | 'createdAt' | 'updatedAt'>{
+export interface IUser extends Omit<IMongoUser, '_id' | 'communitiesJoined' | 'connections' | 'requestsSent' | 'requestsReceived' | 'blocked' | 'createdAt' | 'updatedAt'> {
     _id: string,
+    communitiesJoined: string[],
     connections: string[],
     requestsSent: string[],
     requestsReceived: string[],
@@ -12,7 +13,34 @@ export interface IUser extends Omit<IMongoUser, '_id' | 'connections' | 'request
 
 export const useUserStore = defineStore('user', {
     state: () => ({
-        user: {} as IUser,
+        user: {
+          _id: '',
+          authId: '',
+          email: '',
+          location: {},
+          climbingExperience: {
+            disciplines: []
+          },
+          availability: {
+            monday: [],
+            tuesday: [],
+            wednesday: [],
+            thursday: [],
+            friday: [],
+            saturday: [],
+            sunday: []
+          },
+          preferences: {
+            colorTheme: 'system'
+          },
+          communitiesJoined: [],
+          connections: [],
+          requestsSent: [],
+          requestsReceived: [],
+          blocked: [],
+          registrationCompleted: false
+
+        } as IUser,
         error: null as {} | null
     }),
     actions: {
@@ -24,15 +52,13 @@ export const useUserStore = defineStore('user', {
                 this.error = error.value
             }
             if(data.value) {
-                this.user = data.value;
+                this.$patch({user: data.value})
             }
         },
         async updateUser(user: IUser) {
             this.error = null;
             const response =  await $fetch(`/api/users/${user._id}`, {method: "PUT", body: user});
-            if(response) {
-                this.user = response;
-            } else {
+            if(!response) {
                 this.error = "There was an error updating the user."
             }
         },

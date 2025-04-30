@@ -10,11 +10,11 @@ export const zodUserSchema = z.object({
   profilePicture: z.string().optional(),
   bio: z.string().optional(),
   location: z.object({
-    coordinates: z.object({
-      latitude: z.number(),
-      longitude: z.number()
+    geoJSON: z.object({
+      type: z.string().refine((string) => string === 'Point'),
+      coordinates: z.tuple([z.number(), z.number()])
     }).optional(),
-    geohash: z.string().optional(),
+    locatedAt: z.number().optional(),
     address: z.string().optional(),
   }).optional(),
   climbingExperience: z.object({
