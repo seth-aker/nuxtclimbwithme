@@ -12,9 +12,9 @@ export interface IUser {
     location: {
       geoJSON?: {
         type: "Point",
-        coordinates: [number, number]
+        coordinates: number[]
       },
-      locatedAt?: number,
+      locatedAt?: number | null,
       address?: string;
     };
     climbingExperience: {
@@ -65,8 +65,8 @@ const userSchema = new mongoose.Schema<IUser>({
     bio: { type: String },
     location: {
         geoJSON: {
-          type: { type: String, default: 'Point', immutable: true},
-          coordinates: {type: [Number, Number], default: undefined},
+          type: { type: String, default: 'Point'},
+          coordinates: {type: [Number], default: undefined},
         },
         locatedAt: Number,
         address: { type: String }, // Optional human-readable address

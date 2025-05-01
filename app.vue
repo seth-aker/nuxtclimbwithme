@@ -9,8 +9,8 @@
 <script setup lang='ts'>
 const userStore = useUserStore()
 const colorMode = useColorMode()
-watch(userStore.user.preferences, (newValue) => {
-  colorMode.preference = newValue.colorTheme ?? 'system'
+watchEffect(() => {
+  colorMode.preference = userStore.user.preferences.colorTheme
 })
 </script>
 

@@ -1,6 +1,7 @@
 <template>
    <div class="w-screen h-screen flex flex-col items-center">
-    
+    {{ `Lat: ${coords.latitude}` }}
+    {{ `Long: ${coords.longitude}` }}
   </div>
 </template>
 
@@ -20,12 +21,12 @@ watch(locatedAt, async () => {
   if(error.value) {
     userStore.user.location.geoJSON = undefined;
   } else if(coords.value.latitude && coords.value.longitude) {
-    console.log('setting location')
     if(!userStore.user.location) {
-      userStore.user.location = {geoJSON: undefined}
+      userStore.user.location = {geoJSON: undefined, locatedAt: locatedAt.value, address: undefined }
     }
-    userStore.user.location.geoJSON = {type: "Point", coordinates: [coords.value.latitude, coords.value.longitude]};
+    userStore.user.location.geoJSON = {type: "Point", coordinates: [coords.value.longitude, coords.value.latitude]};
+    userStore.user.location.locatedAt = locatedAt.value
   }
-  await userStore.updateUser(userStore.user);
+  await userStore.updateUser({location: userStore.user.location});
 }, {once: true})
 </script>

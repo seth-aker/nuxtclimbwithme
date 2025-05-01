@@ -56,15 +56,20 @@ export const zodUserSchema = z.object({
   updatedAt: z.coerce.date(),
 });
 
-export default function validateUser(user: unknown) {
-  try {
-    const result = zodUserSchema.safeParse(user);
-
-    if (!result.success) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: "Bad Request",
-        message: result.error.message,
+export default function validateUser(partial: boolean) {
+  return function _validateUser (user: unknown) {
+    try {
+      let result;
+      if(partial) {
+        result = zodUserSchema.partial().safeParse(user)
+      } else {
+        result = zodUserSchema.safeParse(user); 
+      }
+      if (!result.success) {
+        throw createError({
+          statusCode: 400,
+          statusMessage: "Bad Request",
+          message: result.error.message,
       });
     }
     return result.data;
@@ -72,4 +77,5 @@ export default function validateUser(user: unknown) {
     console.log(e) 
     throw e
   }
+}
 }

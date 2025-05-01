@@ -3,7 +3,7 @@ import User from "~/server/models/User";
 export default defineEventHandler(async (event) => {
   // Authorize()
   readBodyProtection(event);
-  const body = await readValidatedBody(event, validateUser);
+  const body = await readValidatedBody(event, validateUser(true));
   const userId = getRouterParam(event, 'id');
   if(!userId) {
     throw createError({
@@ -11,7 +11,8 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Bad Request",
     })
   }
-  const user = await User.findByIdAndUpdate(userId, {$set: body}).exec();
+  const user = await User.findByIdAndUpdate(userId, body).exec();
+
   if(!user) {
     throw createError({
       statusCode: 404,
@@ -20,4 +21,5 @@ export default defineEventHandler(async (event) => {
     })
   }
   return user.toObject();
+ 
 })

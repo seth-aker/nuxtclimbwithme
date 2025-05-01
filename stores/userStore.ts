@@ -17,9 +17,18 @@ export const useUserStore = defineStore('user', {
           _id: '',
           authId: '',
           email: '',
-          location: {},
+          location: {
+            geoJSON: undefined,
+            locatedAt: undefined,
+            address: undefined,
+          },
           climbingExperience: {
-            disciplines: []
+            disciplines: [] as { 
+                name: 'Bouldering' | 'Sport' | 'Top Rope' | 'Trad' | 'Aid' | 'Ice' | 'Alpine',
+                grade?: string,
+                yearsExperience?: number,
+                certified?: boolean
+              }[],
           },
           availability: {
             monday: [],
@@ -31,7 +40,9 @@ export const useUserStore = defineStore('user', {
             sunday: []
           },
           preferences: {
-            colorTheme: 'system'
+            colorTheme: 'system',
+            openToClimbingTypes: undefined,
+            searchRadius: undefined,
           },
           communitiesJoined: [],
           connections: [],
@@ -55,11 +66,14 @@ export const useUserStore = defineStore('user', {
                 this.$patch({user: data.value})
             }
         },
-        async updateUser(user: IUser) {
+        async updateUser(payload: Partial<IUser>) {
             this.error = null;
-            const response =  await $fetch(`/api/users/${user._id}`, {method: "PUT", body: user});
+            
+            const response = await $fetch(`/api/users/${this.$state.user._id}`, {method: "PUT", body: payload});
             if(!response) {
                 this.error = "There was an error updating the user."
+            } else {
+                this.$patch({user: payload})
             }
         },
         async updateProfilePicture(formData: FormData) {
@@ -71,3 +85,6 @@ export const useUserStore = defineStore('user', {
         }
     }
 })
+function isKeyOfUser(obj: any, key: string): key is keyof IUser {
+    return key in obj;
+  }
