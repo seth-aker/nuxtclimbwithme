@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center justify-center">
-    <FormsRegistrationPage1 />
+    <FormsRegistrationTest1 />
   </div>
 </template>
 

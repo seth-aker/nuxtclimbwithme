@@ -1,18 +1,19 @@
-<script setup lang="ts">
-import type { SelectRootEmits, SelectRootProps } from 'reka-ui'
-import { SelectRoot, useForwardPropsEmits } from 'reka-ui'
-
-const props = defineProps<SelectRootProps>()
-const emits = defineEmits<SelectRootEmits>()
-
-const forwarded = useForwardPropsEmits(props, emits)
-</script>
-
 <template>
-  <SelectRoot
-    data-slot="select"
-    v-bind="forwarded"
-  >
-    <slot />
+    <SelectRoot v-model="modelValue" :placeholder :selectOptions v-bind="$attrs">
+    <SelectTrigger>
+      <SelectValue :placeholder="placeholder" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem v-for="option in selectOptions" :key="option.value" :value="option.value">
+        {{ option.label }}
+      </SelectItem>
+    </SelectContent>
   </SelectRoot>
 </template>
+
+<script setup lang="ts">
+const modelValue = defineModel<any>()
+const { placeholder, selectOptions } = defineProps<{
+    placeholder?: string, 
+    selectOptions?: any[]}>()
+</script>

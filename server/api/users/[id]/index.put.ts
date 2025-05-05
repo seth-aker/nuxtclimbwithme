@@ -5,14 +5,16 @@ export default defineEventHandler(async (event) => {
   readBodyProtection(event);
   const body = await readValidatedBody(event, validateUser(true));
   const userId = getRouterParam(event, 'id');
+  console.log("PUT request recieved")
   if(!userId) {
     throw createError({
       statusCode: 400,
       statusMessage: "Bad Request",
     })
   }
+  console.log(body)
   const user = await User.findByIdAndUpdate(userId, body).exec();
-
+  console.log(user?.toObject())
   if(!user) {
     throw createError({
       statusCode: 404,

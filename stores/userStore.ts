@@ -85,6 +85,3 @@ export const useUserStore = defineStore('user', {
         }
     }
 })
-function isKeyOfUser(obj: any, key: string): key is keyof IUser {
-    return key in obj;
-  }

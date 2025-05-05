@@ -118,6 +118,7 @@ const { handleSubmit, isFieldDirty } = useForm({
 });
 
 const onSubmit = handleSubmit(async (values) => {
+  loading.value = true;
   userStore.user.firstName = values.firstName;
   userStore.user.lastName = values.lastName;
   userStore.user.phoneNumber = values.phoneNumber;
@@ -130,6 +131,7 @@ const onSubmit = handleSubmit(async (values) => {
   } else {
     navigateTo('/register/page_2');
   }
+  loading.value = false;
 });
 </script>
 
