@@ -1,6 +1,8 @@
 <template>
   <div class="flex flex-col items-center justify-center">
-    <FormsRegistrationTest1 />
+    <h1>Welcome to Climb with Me!</h1>
+    <div>We just need a little information to get you started.</div>
+    <FormsRegistrationPage1 />
   </div>
 </template>
 

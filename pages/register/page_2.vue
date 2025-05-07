@@ -1,8 +1,10 @@
 <template>
   <div class="flex flex-col items-center justify-center">
-    <Avatar class="h-1/2 w-1/2">
-      <AvatarImage :src="userStore.user.profilePicture!" alt="ProilePic"/>
-      <AvatarFallback>{{ `${userStore.user.firstName?.at(0)}${userStore.user.lastName?.at(0)}`  }}</AvatarFallback>
+    <Avatar class="w-[50vw] h-[50vw]">
+      <AvatarImage class="h-full w-full" :src="userStore.user.profilePicture!" alt="ProilePic" />
+      <AvatarFallback class="h-full w-full">
+        <Skeleton class="h-full w-full" />
+      </AvatarFallback>
     </Avatar>
     <FormsRegistrationPage2 />
   </div>

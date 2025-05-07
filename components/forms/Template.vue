@@ -6,7 +6,7 @@
         <FormControl>
           <component 
             :is="field.component" 
-            v-bind="{...componentField, ...field}" 
+            v-bind="{...componentField, ...field.componentProps}" 
             :placeholder="field.placeholder" 
             >
           </component>

@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
             createError('An error occurred uploading file');
         }
         const user = await findUserBySub(event);
-        user.profilePicture = response.url;
+        user.profilePicture = `${response.url}?cache=${Date.now()}`;
         user.save();
         return {status: 200}        
     } catch (e) {

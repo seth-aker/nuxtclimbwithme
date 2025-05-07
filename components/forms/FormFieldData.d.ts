@@ -9,7 +9,12 @@ export interface FormFieldData {
     zodSchema: z.Schema,
     placeholder?: any,
     component: string | Component,
-    selectOptions?: {value: string, label: string, disabled?: boolean }[]
+    componentProps?: {
+        selectOptions?: {value: string, label: string, disabled?: boolean }[], // for select input
+        type?: string,     // inputType
+        maxlength?: string // for textarea
+        [key: string]: any
+    }
  }
 
 export interface FormTemplateProps {
