@@ -46,7 +46,6 @@ export default defineNuxtConfig({
     dbName: '',
     s3AccessKeyId: '',
     s3SecretAccessKey: '',
-    s3Endpoint: '',
     s3Bucket: '',
     s3Region: '', 
   },

@@ -12,9 +12,7 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Bad Request",
     })
   }
-  console.log(body)
   const user = await User.findByIdAndUpdate(userId, body).exec();
-  console.log(user?.toObject())
   if(!user) {
     throw createError({
       statusCode: 404,

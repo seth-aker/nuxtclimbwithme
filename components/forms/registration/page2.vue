@@ -49,9 +49,9 @@ const formFields: FormFieldData[] = [
     name: 'profilePicture',
     label: 'Profile Picture',
     zodSchema: z.instanceof(File)
-    .refine((file) => ["image/png", "image/jpeg", "image/jpg",].includes(file.type), 'Invalid file type.')
-    .refine((file) => file.size <= fiveMbSizeLimit, "File should not exceed 5MB")
-    .optional(),
+      .refine((file) => ["image/png", "image/jpeg", "image/jpg",].includes(file.type), 'Invalid file type.')
+      .refine((file) => file.size <= fiveMbSizeLimit, "File should not exceed 5MB")
+      .optional(),
     component: FileInput
   },
   {
@@ -70,7 +70,7 @@ const submitFactory = (handleSubmit: THandleSubmit) => {
     loading.value = true;
     userStore.error = null;
     console.log(values)
-    if(values.profilePicture) {
+    if (values.profilePicture) {
       const formData = new FormData();
       formData.append('profile:image', values.profilePicture)
       await userStore.updateProfilePicture(formData);
@@ -78,7 +78,7 @@ const submitFactory = (handleSubmit: THandleSubmit) => {
         toast.error(userStore.error);
       }
     }
-    await userStore.updateUser({bio: values.bio})
+    await userStore.updateUser({ bio: values.bio })
     if (userStore.error) {
       toast.error(userStore.error);
     } else {
@@ -87,27 +87,6 @@ const submitFactory = (handleSubmit: THandleSubmit) => {
     loading.value = false
   })
 }
-// const submit = handleSubmit(async (values) => {
-//   loading.value = true;
-//   userStore.error = null;
-//   userStore.user.bio = values.bio;
-//   if (values.profilePicture) {
-//     const formData = new FormData();
-//     formData.append('profile:image', values.profilePicture)
-//     await userStore.updateProfilePicture(formData);
-//     if (userStore.error) {
-//       toast.error(userStore.error);
-//     }
-//   }
-//   await userStore.updateUser(userStore.user);
-//   if (userStore.error) {
-//     toast.error(userStore.error);
-//   } else {
-//     navigateTo('/register/page_3')
-//   }
-//   loading.value = false
-
-// })
 
 interface FileUploadEventTarget extends EventTarget {
   files: File[]
