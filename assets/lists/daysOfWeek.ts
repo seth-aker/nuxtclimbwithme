@@ -1,9 +1,9 @@
-export const daysOfWeek: ('monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday')[] = [
-    'monday', 
-    'tuesday', 
-    'wednesday',
-    'thursday',
-    'friday',
-    'saturday',
-    'sunday',
+export const daysOfWeek: ('Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday')[] = [
+    'Monday', 
+    'Tuesday', 
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
 ]

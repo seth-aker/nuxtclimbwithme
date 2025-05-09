@@ -12,7 +12,7 @@
         </Avatar>
         <SheetTrigger as-child>
           <Button @click="editAvatar" class="absolute bottom-0 right-0" size="icon" variant="outline">
-            <Icon name="lucide:edit" size="1rem" />
+            <Icon name="line-md:pencil" size="1rem" />
           </Button>
         </SheetTrigger>
       </div>
@@ -22,7 +22,7 @@
         <Card class="flex w-full rounded-none bg-accent relative pt-0">
           <SheetTrigger as-child>
             <Button @click="editUser" class="self-end absolute " size="icon" variant="outline">
-              <Icon name="lucide:edit" size="1rem" />
+              <Icon name="line-md:pencil" size="1rem" />
             </Button>
           </SheetTrigger>
           <div class="pt-2">
@@ -41,7 +41,7 @@
       </div>
       <SheetContent side="bottom" class="h-10/12 py-12">
         <FormsTemplate class="h-screen overflow-scroll" :fields="formFieldsEditing" :submit-factory="submitFactory"
-          :loading="loading"></FormsTemplate>
+          :loading="loading" :initial-values="initialValues"></FormsTemplate>
       </SheetContent>
     </Sheet>
   </div>
@@ -70,7 +70,7 @@ const userStore = useUserStore();
 const fiveMbSizeLimit = 5 * 1024 * 1024;
 
 const formFieldsEditing = ref<FormFieldData[]>([]);
-
+const initialValues = ref();
 const submitFactory = (handleSubmit: THandleSubmit) => {
   return handleSubmit(async (values) => {
     loading.value = true;
@@ -109,6 +109,7 @@ const editAvatar = () => {
       type: 'file'
     }
   }]
+  initialValues.value = userStore.user.profilePicture
   sheetOpen.value = true
 }
 const editUser = () => {
@@ -116,7 +117,6 @@ const editUser = () => {
     {
       name: 'firstName',
       label: 'First Name',
-      initialValue: userStore.user.firstName,
       zodSchema: z.string(),
       placeholder: 'Your first name...',
       component: Input
@@ -124,7 +124,6 @@ const editUser = () => {
     {
       name: 'lastName',
       label: 'Last Name',
-      initialValue: userStore.user.lastName,
       zodSchema: z.string(),
       placeholder: 'Your last name...',
       component: Input
@@ -132,7 +131,6 @@ const editUser = () => {
     {
       name: 'phoneNumber',
       label: 'Phone Number',
-      initialValue: userStore.user.phoneNumber,
       zodSchema: z.string().optional(),
       placeholder: '(###) ###-####',
       component: Input
@@ -159,7 +157,6 @@ const editUser = () => {
     {
       name: 'state',
       label: 'State',
-      initialValue: '',
       zodSchema: z.string().optional(),
       placeholder: "State: ",
       component: Select,
@@ -181,10 +178,11 @@ const editUser = () => {
       zodSchema: z.string().optional(),
       component: Textarea,
       componentProps: {
-        maxlength: '500',
+        maxlength: 500,
       }
     }
   ]
+  initialValues.value = {firstName: userStore.user.firstName, lastName: userStore.user.lastName, phoneNumber: userStore.user.phoneNumber, bio: userStore.user.bio}
   sheetOpen.value = true
 }
 </script>

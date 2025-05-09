@@ -61,7 +61,7 @@ const formFields: FormFieldData[] = [
     zodSchema: z.string().optional(),
     component: Textarea,
     componentProps: {
-      maxlength: '500',
+      maxlength: 500,
     }
   }
 ]

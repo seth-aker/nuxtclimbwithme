@@ -12,7 +12,7 @@
         <Button v-else disabled>
           <LoadingSpinner :stroke-width="2" :circumference="40" color="#FFFFFF" />
         </Button>
-        <Button variant="outline" @click.prevent="navigateTo('/register/page_2')">Skip</Button>
+        <Button variant="outline" @click.prevent="navigateTo('/register/page_3')">Skip</Button>
       </template>
     </FormsTemplate>
   </div>
@@ -50,7 +50,7 @@ const formFields: FormFieldData[] = [
     zodSchema: z.string().optional(),
     component: Textarea,
     componentProps: {
-      maxlength: '500',
+      maxlength: 500,
     }
   }
 ]

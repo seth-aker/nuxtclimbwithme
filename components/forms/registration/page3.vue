@@ -49,7 +49,7 @@
           <FormLabel>Belay Certified</FormLabel>
         </FormItem>
       </FormField>
-      <FormField type="checkbox" :value="field.value.certified" :unchecked-value="false" :name="`disciplines[${index}].openToClimbing`" v-slot="{ componentField, setValue }">
+      <FormField type="checkbox" :value="field.value.openToClimbing" :unchecked-value="false" :name="`disciplines[${index}].openToClimbing`" v-slot="{ componentField, setValue }">
         <FormItem class="flex flex-row">
           <FormLabel>Open to climbing</FormLabel>
           <FormDescription>Check the box if you want to be included other climbers' searches in this discipline</FormDescription>

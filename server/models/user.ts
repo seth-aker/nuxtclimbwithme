@@ -1,5 +1,10 @@
 import mongoose, { Schema, Types } from "mongoose"
-
+export interface IClimbingDiscipline {
+  name: 'Bouldering' | 'Sport' | 'Top Rope' | 'Trad' | 'Aid' | 'Ice' | 'Alpine',
+  grade?: string,
+  yearsExperience?: number,
+  certified?: boolean,
+}
 export interface IUser {
     _id: Types.ObjectId;
     authId: string
@@ -18,12 +23,7 @@ export interface IUser {
       address?: string;
     };
     climbingExperience: {
-      disciplines: {
-        name: 'Bouldering' | 'Sport' | 'Top Rope' | 'Trad' | 'Aid' | 'Ice' | 'Alpine',
-        grade?: string,
-        yearsExperience?: number,
-        certified?: boolean
-      }[]
+      disciplines: IClimbingDiscipline[]
     };
     availability: {
       monday: ('Morning' | 'Afternoon' | 'Evening')[];

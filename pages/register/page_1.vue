@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center justify-center">
     <h1>Welcome to Climb with Me!</h1>
     <div>We just need a little information to get you started.</div>
-    <FormsTemplate class="w-full p-4" :fields="formFields" :submitFactory="submitFactory" :loading="loading">
+    <FormsTemplate class="w-full p-4" :fields="formFields" :submitFactory="submitFactory" :loading="loading" :initial-values="initialValues">
       <template #submitButton="{ onSubmit, loading }">
         <Button v-if="!loading" @click.prevent="onSubmit">Submit</Button>
         <Button v-else disabled>
@@ -33,7 +33,6 @@ const formFields: FormFieldData[] = [
   {
     name: 'firstName',
     label: 'First Name',
-    initialValue: userStore.user.firstName,
     zodSchema: z.string(),
     placeholder: 'Your first name...',
     component: Input
@@ -41,7 +40,6 @@ const formFields: FormFieldData[] = [
   {
     name: 'lastName',
     label: 'Last Name',
-    initialValue: userStore.user.lastName,
     zodSchema: z.string(),
     placeholder: 'Your last name...',
     component: Input
@@ -49,7 +47,6 @@ const formFields: FormFieldData[] = [
   {
     name: 'phoneNumber',
     label: 'Phone Number',
-    initialValue: userStore.user.phoneNumber,
     zodSchema: z.string().optional(),
     placeholder: '(###) ###-####',
     component: Input
@@ -76,7 +73,6 @@ const formFields: FormFieldData[] = [
   {
     name: 'state',
     label: 'State',
-    initialValue: '',
     zodSchema: z.string().optional(),
     placeholder: "State: ",
     component: Select,
@@ -93,7 +89,11 @@ const formFields: FormFieldData[] = [
   }
 
 ]
-
+const initialValues = [
+  {field: 'firstName', value: userStore.user.firstName },
+  {field: 'lastName', value:  userStore.user.lastName },
+  {field: 'phoneNumber', value: userStore.user.phoneNumber}
+]
 const submitFactory = (handleSubmit: THandleSubmit) => {
   return handleSubmit(async (values) => {
     loading.value = true

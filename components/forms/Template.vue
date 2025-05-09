@@ -1,8 +1,8 @@
 <template>
   <form v-bind="$attrs">
-    <FormField v-for="field in fields" :name="field.name" :label="field.label" v-slot="{ componentField }"
+    <FormField v-for="field in fields" :name="field.name" :label="field.label" v-slot="{ componentField }" v-bind="field.formFieldProps"
       :validate-on-blur="!isFieldDirty">
-      <FormItem v-auto-animate>
+      <FormItem v-bind="field.formItemProps" v-auto-animate>
         <FormLabel>{{ field.label }}</FormLabel>
         <FormControl>
           <component :is="field.component" v-bind="{ ...componentField, ...field.componentProps }"
@@ -29,11 +29,9 @@ import type { FormTemplateProps } from './FormFieldData';
 import { useForm } from 'vee-validate';
 import * as z from 'zod';
 
-const { fields, submitFactory, loading } = defineProps<FormTemplateProps>()
+const { fields, submitFactory, loading, initialValues } = defineProps<FormTemplateProps>()
 
 const schemaObject = Object.fromEntries(fields.map((field) => [field.name, field.zodSchema]));
-
-const initialValues = Object.fromEntries(fields.map((field) => [field.name, field.initialValue]));
 
 const schema = toTypedSchema(z.object(schemaObject))
 
