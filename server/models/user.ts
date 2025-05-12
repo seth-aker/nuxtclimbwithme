@@ -5,6 +5,13 @@ export interface IClimbingDiscipline {
   yearsExperience?: number,
   certified?: boolean,
 }
+export interface IBasicAddress {
+  line1: string,
+  line2?: string,
+  city: string,
+  state: string,
+  zip: number
+}
 export interface IUser {
     _id: Types.ObjectId;
     authId: string
@@ -20,7 +27,7 @@ export interface IUser {
         coordinates: number[]
       },
       locatedAt?: number | null,
-      address?: string;
+      address?: IBasicAddress
     };
     climbingExperience: {
       disciplines: IClimbingDiscipline[]
@@ -69,7 +76,13 @@ const userSchema = new mongoose.Schema<IUser>({
           coordinates: {type: [Number], default: undefined},
         },
         locatedAt: Number,
-        address: { type: String }, // Optional human-readable address
+        address: { 
+          line1: String,
+          line2: String,
+          city: String,
+          state: String,
+          zip: String
+         }, // Optional human-readable address
     },
     climbingExperience: {
         disciplines: [{

@@ -15,7 +15,13 @@ export const zodUserSchema = z.object({
       coordinates: z.tuple([z.number(), z.number()])
     }).optional(),
     locatedAt: z.number().optional(),
-    address: z.string().optional(),
+    address: z.object({
+      line1: z.string(),
+      line2: z.string().optional(),
+      city: z.string(),
+      state: z.string(),
+      zip: z.string().regex(/^[0-9]{5}$/gm, "Zip code must be 5 numerical digits long")
+    }).optional()
   }).optional(),
   climbingExperience: z.object({
     disciplines: z.array(z.object({

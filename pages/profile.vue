@@ -32,7 +32,7 @@
             <span class="font-bold">Phone Number: </span><span>{{ userStore.user.phoneNumber }}</span>
           </div>
           <div>
-            <span class="font-bold">Address: </span><span>{{ userStore.user.location?.address }}</span>
+            <span class="font-bold">Address: </span><span>{{ userStore.address }}</span>
           </div>
           <div>
             <span class="font-bold">Bio: </span><span>{{ userStore.user.bio }}</span>
@@ -40,6 +40,10 @@
         </Card>
       </div>
       <SheetContent side="bottom" class="h-10/12 py-12">
+        <SheetTitle>Edit User</SheetTitle>
+        <VisuallyHidden as-child>
+          <SheetDescription>A form modal to edit user data.</SheetDescription>
+        </VisuallyHidden><SheetDescription></SheetDescription>
         <FormsTemplate class="h-screen overflow-scroll" :fields="formFieldsEditing" :submit-factory="submitFactory"
           :loading="loading" :initial-values="initialValues"></FormsTemplate>
       </SheetContent>
@@ -56,6 +60,7 @@ import { Input } from '~/components/ui/input';
 import { states } from '~/assets/lists/states';
 import { Select } from '~/components/ui/select';
 import { Textarea } from '~/components/ui/textarea';
+import { VisuallyHidden } from 'reka-ui';
 definePageMeta({
   pageTransition: {
     name: 'slide-left',
@@ -74,20 +79,35 @@ const initialValues = ref();
 const submitFactory = (handleSubmit: THandleSubmit) => {
   return handleSubmit(async (values) => {
     loading.value = true;
+    console.log(values)
     for (const [key, value] of Object.entries(values)) {
-      if (key === 'profilePicture') {
-        const formData = new FormData();
-        formData.append('profile:image', value as any)
-        await userStore.updateProfilePicture(formData);
+      switch (key) {
+        case 'profilePicture':
+          const formData = new FormData();
+          formData.append('profile:image', value as any)
+          await userStore.updateProfilePicture(formData);
+          break;
+        case 'addressLine1':
+          userStore.user.location.address?.line1 === value
+          break;
+        case 'addressLine2':
+          userStore.user.location.address?.line2 === value
+          break;
+        case 'city':
+          userStore.user.location.address?.city === value;
+          break;
+        case 'state':
+          userStore.user.location.address?.line2 === value;
+          break;
+        case 'zip':
+          userStore.user.location.address?.zip === value;
+          break;
+        default:
+          (userStore.user as any)[key] = value
+          break;
       }
-      if (key.includes('address') || key === 'city' || key === 'state' || key === 'zip') {
-        userStore.user.location.address = `${values.addressLine1}${values.addressLine2 ? `, ${values.addressLine2}` : ''}, ${values.city ?? ''}, ${values.state ?? ''} ${values.zip ?? ''}`
-      }
-      else {
-        (userStore.user as any)[key] = value
-      }
-      await userStore.updateUser(userStore.user);
     }
+    // await userStore.updateUser(userStore.user);
     if (userStore.error) {
       toast.error(userStore.error)
     }
@@ -119,47 +139,47 @@ const editUser = () => {
       label: 'First Name',
       zodSchema: z.string(),
       placeholder: 'Your first name...',
-      component: Input
+      component: markRaw(Input)
     },
     {
       name: 'lastName',
       label: 'Last Name',
       zodSchema: z.string(),
       placeholder: 'Your last name...',
-      component: Input
+      component: markRaw(Input)
     },
     {
       name: 'phoneNumber',
       label: 'Phone Number',
       zodSchema: z.string().optional(),
       placeholder: '(###) ###-####',
-      component: Input
+      component: markRaw(Input)
     },
     {
       name: 'addressLine1',
       label: 'Address Line 1',
       zodSchema: z.string().optional(),
-      component: Input
+      component: markRaw(Input)
     },
     {
-      name: 'adressLine2',
+      name: 'addressLine2',
       label: 'Address Line 2',
       placeholder: 'Apt/Unit #',
-      component: Input,
+      component: markRaw(Input),
       zodSchema: z.string().optional()
     },
     {
       name: 'city',
       label: 'City',
       zodSchema: z.string().optional(),
-      component: Input,
+      component: markRaw(Input),
     },
     {
       name: 'state',
       label: 'State',
       zodSchema: z.string().optional(),
       placeholder: "State: ",
-      component: Select,
+      component: markRaw(Select),
       componentProps: {
         selectOptions: states
       }
@@ -169,20 +189,29 @@ const editUser = () => {
       label: 'Zip Code',
       placeholder: '#####',
       zodSchema: z.string().regex(/^[0-9]{5}$/gm, "Zip code must be 5 numerical digits long").optional(),
-      component: Input
+      component: markRaw(Input)
     },
     {
       name: 'bio',
       label: 'Bio',
       placeholder: 'Tell the world about yourself',
       zodSchema: z.string().optional(),
-      component: Textarea,
+      component: markRaw(Textarea),
       componentProps: {
         maxlength: 500,
       }
     }
   ]
-  initialValues.value = {firstName: userStore.user.firstName, lastName: userStore.user.lastName, phoneNumber: userStore.user.phoneNumber, bio: userStore.user.bio}
+  initialValues.value = {
+    firstName: userStore.user.firstName, 
+    lastName: userStore.user.lastName, 
+    phoneNumber: userStore.user.phoneNumber, 
+    addressLine1: userStore.user.location.address?.line1,
+    addressLine2: userStore.user.location.address?.line2,
+    city: userStore.user.location.address?.city,
+    state: userStore.user.location.address?.state,
+    zip: userStore.user.location.address?.zip,
+    bio: userStore.user.bio}
   sheetOpen.value = true
 }
 </script>

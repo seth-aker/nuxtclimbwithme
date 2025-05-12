@@ -3,6 +3,7 @@ import User from "~/server/models/User";
 export default defineEventHandler(async (event) => {
   // Authorize()
   readBodyProtection(event);
+  
   const body = await readValidatedBody(event, validateUser(true));
   const userId = getRouterParam(event, 'id');
   console.log("PUT request recieved")

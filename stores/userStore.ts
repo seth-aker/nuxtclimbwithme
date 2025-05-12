@@ -49,6 +49,15 @@ export const useUserStore = defineStore('user', {
         } as IUser,
         error: null as {} | null
     }),
+    getters: {
+        address(state) {
+            if(state.user.location.address && state.user.location.address.line1 && state.user.location.address.city && state.user.location.address.state && state.user.location.address.zip ) {
+                return `${state.user.location.address.line1} ${state.user.location.address.line2 ? state.user.location.address.line2 : ''}, ${state.user.location.address.city} ${state.user.location.address.state} ${state.user.location.address.zip}`
+            } else {
+                return undefined
+            }
+        } 
+    },
     actions: {
         async fetchUser() {
             this.error = null;
