@@ -1,12 +1,17 @@
 import User from "~/server/models/User";
-
+import findUserBySub from "~/server/utils/findUserBySub";
 export default defineEventHandler(async (event) => {
-  // Authorize()
-  readBodyProtection(event);
-  
-  const body = await readValidatedBody(event, validateUser(true));
+  const currentUser = await findUserBySub(event);
   const userId = getRouterParam(event, 'id');
-  console.log("PUT request recieved")
+  if (currentUser._id.toString() !== userId) {
+      throw createError({
+          statusCode: 403,
+          statusMessage: "Forbidden",
+          message: "You can only update your own user data"
+      });
+  }
+  readBodyProtection(event);
+  const body = await readValidatedBody(event, validateUser(true));
   if(!userId) {
     throw createError({
       statusCode: 400,

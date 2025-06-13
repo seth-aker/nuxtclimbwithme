@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full">
     <form>
       <Label class="text-sm font-medium">Availability</Label>
       <div class="text-muted-foreground text-sm">What general days/times are you available?</div>
@@ -69,6 +69,7 @@ import { toast } from 'vue-sonner';
 import * as z from 'zod'
 import { daysOfWeek } from '~/assets/lists/daysOfWeek';
 definePageMeta({
+  layout: 'registration',
   pageTransition: {
     name: 'slide-left',
     mode: 'out-in'

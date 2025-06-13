@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center">
+  <div class="flex flex-col items-center justify-center w-full">
     <Avatar class="w-[50vw] h-[50vw]">
       <AvatarImage class="h-full w-full" :src="userStore.user.profilePicture!" alt="ProilePic" />
       <AvatarFallback class="h-full w-full">
@@ -20,6 +20,7 @@
 
 <script lang="ts" setup>
 definePageMeta({
+  layout: 'registration',
   pageTransition: {
     name: 'slide-left',
     mode: 'out-in'

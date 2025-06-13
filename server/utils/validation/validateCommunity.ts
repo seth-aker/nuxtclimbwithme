@@ -16,7 +16,7 @@ export const zodCommunitySchema = z.object({
     updatedAt: z.coerce.date()
 })
 
-export default function validateCommunity(community: unknown) {
+export function validateCommunity(community: unknown) {
     try {
         const result = zodCommunitySchema.safeParse(community);
     

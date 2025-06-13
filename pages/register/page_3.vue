@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full">
     <Dialog v-model:open="dialogOpen">
       <DialogTrigger as-child>
         <Button @click="() => {
@@ -90,6 +90,7 @@ interface IPage3Disciplines extends Omit<IClimbingDiscipline, 'name'> {
  }
 
 definePageMeta({
+  layout: 'registration',
   pageTransition: {
     name: 'slide-left',
     mode: 'out-in'

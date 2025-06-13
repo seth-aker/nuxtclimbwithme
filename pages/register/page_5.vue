@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full">
     <form @submit="submit">
     <FormField name="interests" v-slot="{ componentField }">
       <FormItem>
@@ -29,6 +29,7 @@
 
 <script lang="ts" setup>
 definePageMeta({
+  layout: 'registration',
   pageTransition: {
     name: 'slide-left',
     mode: 'out-in'

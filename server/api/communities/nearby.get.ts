@@ -32,7 +32,6 @@ export default defineEventHandler(async (event) => {
             }
         }
     })
-    const result_2 = await Community.where('location.geoJSON').within({ centerSphere: user.location.geoJSON.coordinates, radius: searchRadius / EARTH_RADIUS_MILES}).exec();
 
 })
 

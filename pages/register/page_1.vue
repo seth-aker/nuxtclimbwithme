@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center">
+  <div class="flex flex-col items-center justify-center w-full">
     <h1>Welcome to Climb with Me!</h1>
     <div>We just need a little information to get you started.</div>
     <FormsTemplate class="w-full p-4" :fields="formFields" :submitFactory="submitFactory" :loading="loading" :initial-values="initialValues">
@@ -16,6 +16,7 @@
 
 <script lang="ts" setup>
 definePageMeta({
+  layout: 'registration',
   pageTransition: {
     name: 'slide-left',
     mode: 'out-in'

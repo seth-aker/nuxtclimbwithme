@@ -1,8 +1,10 @@
 <template>
   <div class="overflow-x-hidden">
-    <AppNav />
-    <NuxtPage class="pb-12" />
-    <Toaster />
+    <NuxtLayout>
+      <AppNav />
+      <NuxtPage class="pb-12" />
+      <Toaster />
+    </NuxtLayout>
   </div>
 </template>
 
