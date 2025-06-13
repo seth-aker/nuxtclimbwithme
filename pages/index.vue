@@ -1,7 +1,5 @@
 <template>
    <div class="w-screen h-screen flex flex-col items-center">
-    {{ `Lat: ${coords.latitude}` }}
-    {{ `Long: ${coords.longitude}` }}
   </div>
 </template>
 
