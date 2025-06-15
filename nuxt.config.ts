@@ -1,5 +1,3 @@
-import tailwindcss from "@tailwindcss/vite";
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   colorMode: {
@@ -14,10 +12,12 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/image',
     '@nuxt/icon',
+    '@nuxt/test-utils/module',
+    '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
     'nuxt-oidc-auth',
     '@pinia/nuxt',
-    '@nuxtjs/color-mode'
+    '@nuxtjs/color-mode',
   ],
   oidc: {
     defaultProvider: "auth0",
@@ -53,9 +53,4 @@ export default defineNuxtConfig({
     prefix: '',
     componentDir: './components/ui'
   },
-  vite: {
-    plugins: [
-      tailwindcss(),
-    ]
-  }
 })
