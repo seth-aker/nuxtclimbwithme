@@ -1,93 +1,11 @@
-// @vitest-environment node// @vitest-environment node
-import { describe, it, expect, vi, beforeEach, afterEach, MockedFunction } from 'vitest'
+// @vitest-environment node
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { createMockUser, mockCreateError, mockFindUserBySub, mockGetValidatedQuery, mockUser } from '~/vitest.setup'
 import type { H3Event } from 'h3'
 import { calculateCompatabilityScore, calculateDistance, calculateClimbingCompatability, calculateInterestsCompatability, calculateAvailabilityCompatability, calculateCommunitiesOverlapScore } from './nearby.get'
 import type { IUser, IClimbingDiscipline } from '~/server/models/User'
 import { AwsClient } from 'aws4fetch'
 import mongoose from 'mongoose'
-// Mock dependencies
-const mockUser = {
-  find: vi.fn(),
-  findById: vi.fn(),
-  create: vi.fn(),
-}
-
-const mockFindUserBySub = vi.fn()
-const mockGetValidatedQuery = vi.fn()
-const mockCreateError = vi.fn()
-
-vi.mock('~/server/models/User', () => ({
-  default: mockUser,
-}))
-
-vi.mock('~/server/utils/findUserBySub', () => ({
-  default: mockFindUserBySub,
-}))
-
-vi.mock('h3', () => ({
-  getValidatedQuery: mockGetValidatedQuery,
-  createError: mockCreateError,
-}))
-
-vi.mock('~/assets/lists/daysOfWeek', () => ({
-  daysOfWeek: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] as const
-}))
-
-// Mock data with correct types
-const createMockUser = (overrides: Partial<IUser> = {}): IUser => ({
-  _id: new mongoose.Types.ObjectId(),
-  authId: 'auth123',
-  email: 'test@example.com',
-  firstName: 'John',
-  lastName: 'Doe',
-  location: {
-    geoJSON: {
-      type: 'Point',
-      coordinates: [-122.4194, 37.7749] // San Francisco
-    },
-    locatedAt: Date.now(),
-    address: {
-      line1: '123 Main St',
-      city: 'San Francisco',
-      state: 'CA',
-      zip: 94102
-    }
-  },
-  climbingExperience: {
-    disciplines: [
-      { name: 'Bouldering', grade: 'V4', yearsExperience: 3, certified: true },
-      { name: 'Sport', grade: '5.10a', yearsExperience: 2, certified: false }
-    ]
-  },
-  availability: {
-    monday: ['Morning', 'Evening'],
-    tuesday: ['Afternoon'],
-    wednesday: ['Morning'],
-    thursday: [],
-    friday: [],
-    saturday: [],
-    sunday: []
-  },
-  preferences: {
-    colorTheme: 'system',
-    openToClimbingTypes: [
-      { name: 'Bouldering', preferredGrade: 'V4', certified: true },
-      { name: 'Sport', preferredGrade: '5.10a', certified: false }
-    ],
-    searchRadius: 50
-  },
-  interests: ['hiking', 'photography', 'camping'],
-  gearOwned: ['harness', 'shoes', 'chalk bag'],
-  communitiesJoined: [new mongoose.Types.ObjectId('507f1f77bcf86cd799439011')],
-  connections: [],
-  requestsSent: [],
-  requestsReceived: [],
-  blocked: [],
-  registrationCompleted: true,
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  ...overrides
-})
 
 describe('User Search API Mocks and Tests', () => {
   let mockCurrentUser: IUser
@@ -187,7 +105,7 @@ describe('User Search API Mocks and Tests', () => {
 
     it('should mock User.find with proper chaining', async () => {
       const query = mockUser.find({})
-      const result = await query.select({}).limit(20)
+      const result = await query.select({}).limit(20).then()
       
       expect(mockUser.find).toHaveBeenCalled()
       expect(result).toEqual([mockOtherUser])
@@ -216,7 +134,7 @@ describe('User Search API Mocks and Tests', () => {
     it('should handle edge cases with empty coordinates', () => {
       const distance = calculateDistance([], [])
       
-      expect(distance).toBe(0)
+      expect(distance).toBe(-1)
     })
   })
 
@@ -255,28 +173,38 @@ describe('User Search API Mocks and Tests', () => {
       expect(score).toBeLessThanOrEqual(1)
     })
 
-    it('should add certification bonus', () => {
-      const disciplinesWithCert: IClimbingDiscipline[] = [
-        { name: 'Bouldering', grade: 'V4', yearsExperience: 2, certified: true }
-      ]
-      const disciplinesWithoutCert: IClimbingDiscipline[] = [
-        { name: 'Bouldering', grade: 'V4', yearsExperience: 2, certified: false }
-      ]
-      
-      const scoreWithCert = calculateClimbingCompatability(
-        disciplinesWithCert,
-        disciplinesWithCert,
-        [{ name: 'Bouldering' }]
-      )
-      
-      const scoreWithoutCert = calculateClimbingCompatability(
-        disciplinesWithoutCert,
-        disciplinesWithoutCert,
-        [{ name: 'Bouldering' }]
-      )
-      
-      expect(scoreWithCert).toBeGreaterThan(scoreWithoutCert)
-    })
+it('should add certification bonus', () => {
+  const user: IClimbingDiscipline[] = [
+    { name: 'Bouldering', grade: 'V4', yearsExperience: 2, certified: false },
+    { name: 'Sport', grade: '5.11a', yearsExperience: 2, certified: false }
+  ];
+
+  const otherUserWithCert: IClimbingDiscipline[] = [
+    { name: 'Bouldering', grade: 'V4', yearsExperience: 2, certified: true }
+  ];
+
+  const otherUserWithoutCert: IClimbingDiscipline[] = [
+    { name: 'Bouldering', grade: 'V4', yearsExperience: 2, certified: false }
+  ];
+
+
+
+  const scoreWithCert = calculateClimbingCompatability(
+    user,
+    otherUserWithCert,
+    [{ name: 'Bouldering' }]
+  );
+
+  const scoreWithoutCert = calculateClimbingCompatability(
+    user,
+    otherUserWithoutCert,
+    [{ name: 'Bouldering' }]
+  );
+
+  expect(scoreWithCert).toBeGreaterThan(scoreWithoutCert);
+  expect(scoreWithCert).toBeLessThanOrEqual(1);
+  expect(scoreWithoutCert).toBeLessThanOrEqual(1);
+});
 
     it('should add preferred grade bonus', () => {
       const userPreferences = [{ name: 'Bouldering' as const, preferredGrade: 'V4' }]

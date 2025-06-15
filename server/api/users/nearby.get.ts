@@ -71,7 +71,7 @@ export default defineEventHandler(async (event) => {
     updatedAt: -1
   }).limit((searchParams.limit ?? DEFAULT_LIMIT) * 2)
 
-  const scoredUsers = searchResults.map(user => {
+  let scoredUsers = searchResults.map(user => {
     const score = calculateCompatabilityScore(currentUser, user)
     const distance = calculateDistance(
       currentUser.location.geoJSON?.coordinates || [], 
@@ -83,9 +83,8 @@ export default defineEventHandler(async (event) => {
       distance
     }
   });
-  
+  scoredUsers = scoredUsers.filter(user => user.distance !== -1)
   scoredUsers.sort((a,b) => b.score - a.score);
-  
   return scoredUsers.map(({user, score, distance}) => ({
     ...user.toObject(),
     compatabilityScore: Math.round(score * 100) / 100,
@@ -127,6 +126,7 @@ export function calculateCompatabilityScore(currentUser: IUser, otherUser: IUser
 }
 
 export function calculateDistance(coords1: number[], coords2: number[]): number {
+  if(coords1.length !== 2 || coords2.length !== 2) return -1;
   const [lon1, lat1] = coords1;
   const [lon2, lat2] = coords2;
   const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -148,7 +148,7 @@ export function calculateClimbingCompatability(
   if(!userDisciplines.length || !otherUserDisciplines.length) return 0
 
   const userTypes = new Set(userDisciplines.map(d => d.name));
-  const otherUserTypes = new Set(userDisciplines.map(d => d.name));
+  const otherUserTypes = new Set(otherUserDisciplines.map(d => d.name));
   const preferredTypes = userPreferences ? new Set(userPreferences.map(d => d.name)): undefined;
   
   const commonTypes = [...userTypes].filter(type => otherUserTypes.has(type));
