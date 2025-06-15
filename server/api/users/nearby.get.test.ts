@@ -1,3 +1,4 @@
+// @vitest-environment node// @vitest-environment node
 import { describe, it, expect, vi, beforeEach, afterEach, MockedFunction } from 'vitest'
 import type { H3Event } from 'h3'
 import { calculateCompatabilityScore, calculateDistance, calculateClimbingCompatability, calculateInterestsCompatability, calculateAvailabilityCompatability, calculateCommunitiesOverlapScore } from './nearby.get'
