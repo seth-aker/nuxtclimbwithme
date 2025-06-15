@@ -2,7 +2,8 @@
   <div class="flex flex-col items-center justify-center w-full">
     <h1>Welcome to Climb with Me!</h1>
     <div>We just need a little information to get you started.</div>
-    <FormsTemplate class="w-full p-4" :fields="formFields" :submitFactory="submitFactory" :loading="loading" :initial-values="initialValues">
+    <FormsTemplate class="w-full p-4" :fields="formFields" :submitFactory="submitFactory" :loading="loading"
+      :initial-values="initialValues">
       <template #submitButton="{ onSubmit, loading }">
         <Button v-if="!loading" @click.prevent="onSubmit">Submit</Button>
         <Button v-else disabled>
@@ -91,9 +92,9 @@ const formFields: FormFieldData[] = [
 
 ]
 const initialValues = [
-  {field: 'firstName', value: userStore.user.firstName },
-  {field: 'lastName', value:  userStore.user.lastName },
-  {field: 'phoneNumber', value: userStore.user.phoneNumber}
+  { field: 'firstName', value: userStore.user.firstName },
+  { field: 'lastName', value: userStore.user.lastName },
+  { field: 'phoneNumber', value: userStore.user.phoneNumber }
 ]
 const submitFactory = (handleSubmit: THandleSubmit) => {
   return handleSubmit(async (values) => {
@@ -104,7 +105,13 @@ const submitFactory = (handleSubmit: THandleSubmit) => {
       phoneNumber: values.phoneNumber,
       location: {
         ...userStore.user.location,
-        address: `${values.addressLine1}${values.addressLine2 ? `, ${values.addressLine2}` : ''}, ${values.city ?? ''}, ${values.state ?? ''} ${values.zip ?? ''}`
+        address: {
+          line1: values.addressLine1,
+          line2: values.addressLine2,
+          city: values.city,
+          state: values.state,
+          zip: values.zip
+        }
       }
     })
     if (userStore.error) {

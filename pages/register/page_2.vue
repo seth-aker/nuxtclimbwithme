@@ -59,7 +59,6 @@ const submitFactory = (handleSubmit: THandleSubmit) => {
   return handleSubmit(async (values) => {
     loading.value = true;
     userStore.error = null;
-    console.log(values)
     if (values.profilePicture) {
       const formData = new FormData();
       formData.append('profile:image', values.profilePicture)
