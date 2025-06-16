@@ -23,9 +23,9 @@ export function calculateCompatabilityScore(currentUser: IUser, otherUser: IUser
   totalScore += distanceScore * SCORING_WEIGHTS.DISTANCE;
 
   const climbingScore = calculateClimbingCompatability(
-    currentUser.climbingExperience.disciplines, 
-    otherUser.climbingExperience.disciplines, 
-    currentUser.preferences.openToClimbingTypes
+    currentUser.climbingExperience.disciplines || [], 
+    otherUser.climbingExperience.disciplines || [], 
+    currentUser.preferences.openToClimbingTypes || []
   );
   totalScore += climbingScore * SCORING_WEIGHTS.CLIMBING_DISCIPLINES;
 
