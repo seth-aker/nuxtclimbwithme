@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
   }
   const searchParams: IUserSearchQuery = await getValidatedQuery(event, (data) => {
     const res = z.object({
-      searchRadius: z.number().optional().default(50),
+      searchRadius: z.number().optional().default(DEFAULT_SEARCH_RADIUS_MILES),
       climbingType: z.array(z.enum(['Bouldering','Sport', 'Top Rope', 'Trad', 'Aid', 'Ice', 'Alpine'])).optional(),
       limit: z.number().optional(),
       availability: z.array(z.string()).optional(),
