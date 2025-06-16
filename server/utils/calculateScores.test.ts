@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { createMockUser } from '~/vitest.setup'
-import type { IUser, IClimbingDiscipline } from '~/server/models/User'
+import type { IUserPrivate, IClimbingDiscipline } from '~/server/models/User'
 import mongoose from 'mongoose'
 import {
   calculateCompatabilityScore,
@@ -14,8 +14,8 @@ import {
 } from './calculateScores'
 
 describe('Calculate Scores Utility Functions', () => {
-  let mockCurrentUser: IUser
-  let mockOtherUser: IUser
+  let mockCurrentUser: IUserPrivate
+  let mockOtherUser: IUserPrivate
 
   beforeEach(() => {
     vi.clearAllMocks()
@@ -236,7 +236,7 @@ describe('Calculate Scores Utility Functions', () => {
 
   describe('calculateAvailabilityCompatability', () => {
     it('should return 0 when users have no overlapping availability', () => {
-      const userAvailability: IUser['availability'] = {
+      const userAvailability: IUserPrivate['availability'] = {
         monday: ['Morning'],
         tuesday: ['Afternoon'],
         wednesday: [],
@@ -245,7 +245,7 @@ describe('Calculate Scores Utility Functions', () => {
         saturday: [],
         sunday: []
       }
-      const otherUserAvailability: IUser['availability'] = {
+      const otherUserAvailability: IUserPrivate['availability'] = {
         monday: [],
         tuesday: [],
         wednesday: ['Evening'],
@@ -261,7 +261,7 @@ describe('Calculate Scores Utility Functions', () => {
     })
 
     it('should calculate overlap correctly', () => {
-      const userAvailability: IUser['availability'] = {
+      const userAvailability: IUserPrivate['availability'] = {
         monday: ['Morning', 'Evening'],
         tuesday: ['Afternoon'],
         wednesday: [],
@@ -270,7 +270,7 @@ describe('Calculate Scores Utility Functions', () => {
         saturday: [],
         sunday: []
       }
-      const otherUserAvailability: IUser['availability'] = {
+      const otherUserAvailability: IUserPrivate['availability'] = {
         monday: ['Morning'],
         tuesday: ['Afternoon', 'Evening'],
         wednesday: [],
@@ -287,7 +287,7 @@ describe('Calculate Scores Utility Functions', () => {
     })
 
     it('should handle perfect availability match', () => {
-      const availability: IUser['availability'] = {
+      const availability: IUserPrivate['availability'] = {
         monday: ['Morning'],
         tuesday: ['Afternoon'],
         wednesday: [],
@@ -303,7 +303,7 @@ describe('Calculate Scores Utility Functions', () => {
     })
 
     it('should handle empty availability gracefully', () => {
-      const emptyAvailability: IUser['availability'] = {
+      const emptyAvailability: IUserPrivate['availability'] = {
         monday: [],
         tuesday: [],
         wednesday: [],
@@ -439,7 +439,7 @@ export const createMockUserWithDisciplines = (disciplines: IClimbingDiscipline[]
     climbingExperience: { disciplines }
   })
 
-export const createMockUserWithAvailability = (availability: Partial<IUser['availability']>) =>
+export const createMockUserWithAvailability = (availability: Partial<IUserPrivate['availability']>) =>
   createMockUser({
     availability: {
       monday: [],

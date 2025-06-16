@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { daysOfWeek } from '~/assets/lists/daysOfWeek';
-import type { IClimbingDiscipline, IUser } from '~/server/models/User';
+import type { IClimbingDiscipline, IUserPrivate } from '~/server/models/User';
 
 const EARTH_RADIUS_MILES = 3963.2;
 const DEFAULT_SEARCH_RADIUS_MILES = 50;
@@ -13,7 +13,7 @@ export const SCORING_WEIGHTS = {
   COMMUNITIES_JOINED_OVERLAP: 0.1
 } as const;
 
-export function calculateCompatabilityScore(currentUser: IUser, otherUser: IUser, searchRadius?: number): number {
+export function calculateCompatabilityScore(currentUser: IUserPrivate, otherUser: IUserPrivate, searchRadius?: number): number {
   let totalScore = 0;
 
   const distance = calculateDistance(currentUser.location.geoJSON?.coordinates || [], otherUser.location.geoJSON?.coordinates || [])
@@ -63,7 +63,7 @@ export function calculateDistance(coords1: number[], coords2: number[]): number 
 export function calculateClimbingCompatability(
   userDisciplines: IClimbingDiscipline[],
   otherUserDisciplines: IClimbingDiscipline[],
-  userPreferences: IUser['preferences']['openToClimbingTypes']
+  userPreferences: IUserPrivate['preferences']['openToClimbingTypes']
 ): number {
   if(!userDisciplines.length || !otherUserDisciplines.length) return 0
 
@@ -109,7 +109,7 @@ export function calculateInterestsCompatability(userInterests: string[], otherUs
   return commonInterests.length / Math.max(_userInterests.length, otherUserSet.size);
 }
 
-export function calculateAvailabilityCompatability(userAvailability: IUser['availability'], otherUserAvailability: IUser['availability']): number {
+export function calculateAvailabilityCompatability(userAvailability: IUserPrivate['availability'], otherUserAvailability: IUserPrivate['availability']): number {
   let totalOverlap = 0;
   let totalSlots = 0;
 

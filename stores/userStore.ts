@@ -1,4 +1,4 @@
-import type { IClimbingDiscipline, IUser as IMongoUser } from "~/server/models/User";
+import type { IClimbingDiscipline, IUserPrivate as IMongoUser } from "~/server/models/User";
 
 export interface IUser extends Omit<IMongoUser, '_id' | 'communitiesJoined' | 'connections' | 'requestsSent' | 'requestsReceived' | 'blocked' | 'createdAt' | 'updatedAt'> {
     _id: string,

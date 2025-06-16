@@ -1,7 +1,7 @@
 // test-setup.ts
 import { vi } from 'vitest'
 import type { H3Event } from 'h3'
-import type { IUser, IClimbingDiscipline } from '~/server/models/User'
+import type { IUserPrivate, IClimbingDiscipline } from '~/server/models/User'
 import { AwsClient } from 'aws4fetch'
 import mongoose from 'mongoose'
 
@@ -43,7 +43,7 @@ export const mockCreateError = vi.fn()
   }))
 
 // Mock data factory
-export const createMockUser = (overrides: Partial<IUser> = {}): IUser => ({
+export const createMockUser = (overrides: Partial<IUserPrivate> = {}): IUserPrivate => ({
   _id: new mongoose.Types.ObjectId(),
   authId: 'auth123',
   email: 'test@example.com',
@@ -114,7 +114,7 @@ export const createMockUserWithDisciplines = (disciplines: IClimbingDiscipline[]
     climbingExperience: { disciplines }
   })
 
-export const createMockUserWithAvailability = (availability: Partial<IUser['availability']>) =>
+export const createMockUserWithAvailability = (availability: Partial<IUserPrivate['availability']>) =>
   createMockUser({
     availability: {
       monday: [],
@@ -177,7 +177,7 @@ export const mockUserFactory = {
 }
 
 // Setup default mock behaviors
-export const setupDefaultMocks = (mockCurrentUser: IUser, mockOtherUser: IUser) => {
+export const setupDefaultMocks = (mockCurrentUser: IUserPrivate, mockOtherUser: IUserPrivate) => {
   mockFindUserBySub.mockResolvedValue(mockCurrentUser)
   mockGetValidatedQuery.mockResolvedValue({
     searchRadius: 50,

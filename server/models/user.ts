@@ -12,23 +12,13 @@ export interface IBasicAddress {
   state: string,
   zip: number
 }
-export interface IUser {
+
+export interface IUserPublic {
     _id: Types.ObjectId;
-    authId: string
-    email: string;
-    phoneNumber?: string,
     firstName?: string;
     lastName?: string;
     profilePicture?: string;
     bio?: string;
-    location: {
-      geoJSON?: {
-        type: "Point",
-        coordinates: number[]
-      },
-      locatedAt?: number | null,
-      address?: IBasicAddress
-    };
     climbingExperience: {
       disciplines: IClimbingDiscipline[]
     };
@@ -42,6 +32,29 @@ export interface IUser {
       sunday: ('Morning' | 'Afternoon' | 'Evening')[];
     };
     preferences: {
+      openToClimbingTypes?: {
+        name: 'Bouldering' | 'Sport' | 'Top Rope' | 'Trad' | 'Aid' | 'Ice' | 'Alpine',
+        preferredGrade?: string,
+        certified?: boolean
+      }[];
+    };
+    interests?: string[];
+    gearOwned?: string[];
+}
+
+export interface IUserPrivate extends IUserPublic {
+    authId: string
+    email: string;
+    phoneNumber?: string,
+    location: {
+      geoJSON?: {
+        type: "Point",
+        coordinates: number[]
+      },
+      locatedAt?: number | null,
+      address?: IBasicAddress
+    };
+    preferences: {
       colorTheme: 'system' | 'light' | 'dark';
       openToClimbingTypes?: {
         name: 'Bouldering' | 'Sport' | 'Top Rope' | 'Trad' | 'Aid' | 'Ice' | 'Alpine',
@@ -50,8 +63,6 @@ export interface IUser {
       }[];
       searchRadius?: number;
     };
-    interests?: string[];
-    gearOwned?: string[];
     communitiesJoined: Types.ObjectId[]
     connections: Types.ObjectId[]; // Array of User IDs
     requestsSent:  Types.ObjectId[]; // Array of User IDs
@@ -62,7 +73,7 @@ export interface IUser {
     updatedAt?: Date;
   }
 
-const userSchema = new mongoose.Schema<IUser>({
+const userSchema = new mongoose.Schema<IUserPrivate>({
     authId: {type: String, required: true, unique: true},
     email: { type: String, required: true, unique: true },
     phoneNumber: {type: String, required: false, unique: true},
@@ -120,5 +131,23 @@ const userSchema = new mongoose.Schema<IUser>({
     registrationCompleted: { type: Boolean, default: false }
     }, {timestamps: true});
 
-export default mongoose.model<IUser>('User', userSchema);
+export function trimPrivateFields(user: IUserPrivate): IUserPublic {
+  const publicUser: IUserPublic = {
+    _id: user._id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    profilePicture: user.profilePicture,
+    bio: user.bio,
+    climbingExperience: user.climbingExperience,
+    availability: user.availability,
+    preferences: {
+      openToClimbingTypes: user.preferences.openToClimbingTypes
+    },
+    interests: user.interests,
+    gearOwned: user.gearOwned,
+  }
+  return publicUser;
+}
+
+export default mongoose.model<IUserPrivate>('User', userSchema);
 

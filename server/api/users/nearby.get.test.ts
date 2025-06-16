@@ -2,13 +2,13 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { createMockUser, mockCreateError, mockFindUserBySub, mockGetValidatedQuery, mockUser } from '~/vitest.setup'
 import type { H3Event } from 'h3'
-import type { IUser, IClimbingDiscipline } from '~/server/models/User'
+import type { IUserPrivate, IClimbingDiscipline } from '~/server/models/User'
 import { AwsClient } from 'aws4fetch'
 import mongoose from 'mongoose'
 
 describe('User Search API Mocks and Tests', () => {
-  let mockCurrentUser: IUser
-  let mockOtherUser: IUser
+  let mockCurrentUser: IUserPrivate
+  let mockOtherUser: IUserPrivate
   let mockEvent: Partial<H3Event>
 
   beforeEach(() => {
@@ -156,7 +156,7 @@ export const createMockUserWithDisciplines = (disciplines: IClimbingDiscipline[]
     climbingExperience: { disciplines }
   })
 
-export const createMockUserWithAvailability = (availability: Partial<IUser['availability']>) =>
+export const createMockUserWithAvailability = (availability: Partial<IUserPrivate['availability']>) =>
   createMockUser({
     availability: {
       monday: [],

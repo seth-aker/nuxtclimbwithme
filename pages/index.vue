@@ -2,7 +2,7 @@
   <div class="w-screen h-screen flex flex-col items-center">
     <LoadingSpinner color="white" :circumference="200" v-if="status === 'pending'" />
     <div v-else-if="status === 'success'">
-      <div v-for="(user, index) in data" :key="index">
+      <div v-for="(user, index) in data?.users" :key="index">
         {{ user.firstName }}{{ user.lastName }}
       </div>
     </div>

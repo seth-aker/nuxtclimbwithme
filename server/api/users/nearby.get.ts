@@ -1,6 +1,6 @@
 import mongoose, { ObjectId } from 'mongoose';
 import * as z from 'zod'
-import User, { IClimbingDiscipline, IUser } from '~/server/models/User';
+import User, { IClimbingDiscipline, IUserPrivate, trimPrivateFields } from '~/server/models/User';
 import { calculateCompatabilityScore, calculateDistance } from '~/server/utils/calculateScores';
 
 interface IUserSearchQuery {
@@ -15,7 +15,7 @@ const DEFAULT_SEARCH_RADIUS_MILES = 50
 const DEFAULT_LIMIT = 20
 const MAX_SEARCH_RADIUS_MILES = 500 // Maximum radius to expand to
 const RADIUS_EXPANSION_MULTIPLIER = 2 // How much to multiply radius by each iteration
-
+const MINIMUM_RESULTS = 5
 export default defineEventHandler(async (event) => {
   const currentUser = await findUserBySub(event);
   if(!currentUser.location.geoJSON) {
@@ -44,10 +44,24 @@ export default defineEventHandler(async (event) => {
 
   // Progressive search with expanding radius
   let currentRadius = searchParams.searchRadius ?? currentUser.preferences.searchRadius ?? DEFAULT_SEARCH_RADIUS_MILES;
-  let searchResults: any[] = [];
+  let searchResults: (mongoose.Document<unknown, {}, IUserPrivate> & IUserPrivate & Required<{
+          _id: mongoose.Types.ObjectId;
+      }> & {
+          __v: number;
+      })[] = [];
 
+let scoredResults: {
+        user: mongoose.Document<unknown, {}, IUserPrivate> & IUserPrivate & Required<{
+            _id: mongoose.Types.ObjectId;
+        }> & {
+            __v: number;
+        };
+        score: number;
+        distance: number;
+      }[] = []
   // Keep expanding search radius until we find users or reach maximum radius
-  while (searchResults.length === 0 && currentRadius <= MAX_SEARCH_RADIUS_MILES) {
+  while (searchResults.length < MINIMUM_RESULTS && currentRadius <= MAX_SEARCH_RADIUS_MILES) {
+    console.log(currentRadius)
     searchResults = await User.find({
       _id: { $nin: [currentUser._id, ...currentUser.blocked]},
       'location.geoJSON': {
@@ -60,46 +74,49 @@ export default defineEventHandler(async (event) => {
       },
       registrationCompleted: true,
     }).select({
-      authId: -1, 
-      email: -1, 
-      phoneNumber: -1, 
-      'preferences.colorTheme': -1,
-      'preferences.searchRadius': -1,
-      requestsSent: -1,
-      requestsReceived: -1,
-      blocked: -1,
-      createdAt: -1,
-      updatedAt: -1
+      _id: 1,
+      location: 1,
+      climbingExperience: 1,
+      availability: 1,
+      'preferences.openToClimbingTypes': 1,
+      firstName: 1,
+      lastName: 1,
+      bio: 1,
+      interests: 1,
+      gearOwned: 1,
+      communitiesJoined: 1,
+      connections: 1,
+      blocked: 1,
     }).limit((searchParams.limit ?? DEFAULT_LIMIT) * 2)
 
     // If no results found and we haven't reached max radius, expand the search
-    if (searchResults.length === 0 && currentRadius < MAX_SEARCH_RADIUS_MILES) {
+    console.log("Search results length: ", searchResults.length)
+    scoredResults = searchResults.map(user => {
+      const score = calculateCompatabilityScore(currentUser, user)
+      const distance = calculateDistance(
+        currentUser.location.geoJSON?.coordinates || [], 
+        user.location.geoJSON?.coordinates || []
+      );
+      return {
+        user,
+        score,
+        distance,
+      }
+    });
+    scoredResults = scoredResults.filter(result => {
+      return (result.distance !== -1 && !result.user.blocked.includes(currentUser._id))
+    })
+    scoredResults.sort((a,b) => b.score - a.score);
+    console.log("current radius: ", currentRadius)
+    if (scoredResults.length < MINIMUM_RESULTS && currentRadius < MAX_SEARCH_RADIUS_MILES) {
       currentRadius = Math.min(currentRadius * RADIUS_EXPANSION_MULTIPLIER, MAX_SEARCH_RADIUS_MILES);
     } else {
       break;
     }
   }
-
-  let scoredUsers = searchResults.map(user => {
-    const score = calculateCompatabilityScore(currentUser, user)
-    const distance = calculateDistance(
-      currentUser.location.geoJSON?.coordinates || [], 
-      user.location.geoJSON?.coordinates || []
-    );
-    return {
-      user,
-      score,
-      distance,
-      searchRadius: currentRadius // Include the radius that was actually used
-    }
-  });
-  
-  scoredUsers = scoredUsers.filter(user => user.distance !== -1)
-  scoredUsers.sort((a,b) => b.score - a.score);
-  
   return {
-    users: scoredUsers.map(({user, score, distance}) => ({
-      ...user.toObject(),
+    users: scoredResults.map(({user, score, distance}) => ({
+      ...trimPrivateFields(user),
       compatabilityScore: Math.round(score * 100) / 100,
       distance: Math.round(distance * 10) / 10
     })).slice(0, searchParams.limit ?? DEFAULT_LIMIT),
