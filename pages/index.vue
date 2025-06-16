@@ -1,8 +1,16 @@
 <template>
   <div class="w-screen h-screen flex flex-col items-center">
-    <LoadingSpinner v-if="status === 'pending'" />
+    <LoadingSpinner color="white" :circumference="200" v-if="status === 'pending'" />
     <div v-else-if="status === 'success'">
-      {{ data?.toString() }}
+      <div v-for="(user, index) in data" :key="index">
+        {{ user.firstName }}{{ user.lastName }}
+      </div>
+    </div>
+    <div v-else>
+      <div>
+        {{ error }}
+      </div>
+      <Button @click="refresh">Press to retry</Button>
     </div>
   </div>
 </template>
@@ -19,7 +27,8 @@ definePageMeta({
 })
 const { user } = useUserStore();
 useUpdateUserLocation();
-const { error, data, status } = await useFetch('/api/users/nearby');
+const { error, data, status, refresh } = await useFetch('/api/users/nearby');
+
 
 
 </script>
