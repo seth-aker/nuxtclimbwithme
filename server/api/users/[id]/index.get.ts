@@ -3,20 +3,28 @@ import findUserBySub from "~/server/utils/findUserBySub"
 export default defineEventHandler(async (event) => {
     const currentUser = await findUserBySub(event);
     const userId = getRouterParam(event, 'id');
-    if (currentUser._id.toString() !== userId) {
-        throw createError({
-            statusCode: 403,
-            statusMessage: "Forbidden",
-            message: "You can only access your own user data"
-        });
-    }
     if(!userId) {
         throw createError({
           statusCode: 400,
           statusMessage: "Bad Request",
         })
       }
-    const user = await User.findById(userId).exec();
+
+    if (currentUser._id.toString() === userId) {
+        return currentUser;
+    }
+    // Get public information only
+    const user = await User.findById(userId).select({
+        _id: 1,
+        firstName: 1,
+        lastName: 1,
+        profilePicture: 1,
+        climbingExperience: 1,
+        availability: 1,
+        'preferences.openToClimbingTypes': 1,
+        interests: 1,
+        gearOwned: 1
+    });
     if(!user) {
         throw createError({
             statusCode: 404,
