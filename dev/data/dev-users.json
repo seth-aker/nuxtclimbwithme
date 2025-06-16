@@ -1,0 +1,2044 @@
+[
+  {
+    "authId": "auth0|user001",
+    "email": "alex.johnson@email.com",
+    "phoneNumber": "+1-555-0101",
+    "firstName": "Alex",
+    "lastName": "Johnson",
+    "bio": "Passionate boulderer with 5 years of experience. Love exploring new crags and meeting fellow climbers!",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -105.0178,
+          39.7392
+        ]
+      },
+      "address": {
+        "line1": "1234 Mountain View Dr",
+        "city": "Denver",
+        "state": "CO",
+        "zip": "80202"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Bouldering",
+          "grade": "V6",
+          "yearsExperience": 5,
+          "certified": false
+        },
+        {
+          "name": "Sport",
+          "grade": "5.11a",
+          "yearsExperience": 3,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Evening"
+      ],
+      "tuesday": [
+        "Evening"
+      ],
+      "wednesday": [
+        "Evening"
+      ],
+      "thursday": [
+        "Evening"
+      ],
+      "friday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "dark",
+      "openToClimbingTypes": [
+        {
+          "name": "Bouldering",
+          "preferredGrade": "V4-V8",
+          "certified": false
+        },
+        {
+          "name": "Sport",
+          "preferredGrade": "5.10-5.11",
+          "certified": false
+        }
+      ],
+      "searchRadius": 25
+    },
+    "interests": [
+      "Photography",
+      "Hiking",
+      "Yoga"
+    ],
+    "gearOwned": [
+      "Climbing shoes",
+      "Chalk bag",
+      "Crash pad",
+      "Harness",
+      "Quickdraws"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user002",
+    "email": "sarah.martinez@email.com",
+    "phoneNumber": "+1-555-0102",
+    "firstName": "Sarah",
+    "lastName": "Martinez",
+    "bio": "Traditional climbing enthusiast and certified guide. Always up for multi-pitch adventures!",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -119.5383,
+          37.8651
+        ]
+      },
+      "address": {
+        "line1": "567 Granite Way",
+        "city": "Mammoth Lakes",
+        "state": "CA",
+        "zip": "93546"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Trad",
+          "grade": "5.10d",
+          "yearsExperience": 8,
+          "certified": true
+        },
+        {
+          "name": "Alpine",
+          "grade": "5.8",
+          "yearsExperience": 6,
+          "certified": true
+        },
+        {
+          "name": "Sport",
+          "grade": "5.11c",
+          "yearsExperience": 10,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "tuesday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "wednesday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "thursday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "friday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "light",
+      "openToClimbingTypes": [
+        {
+          "name": "Trad",
+          "preferredGrade": "5.8-5.11",
+          "certified": true
+        },
+        {
+          "name": "Alpine",
+          "preferredGrade": "5.6-5.9",
+          "certified": true
+        }
+      ],
+      "searchRadius": 100
+    },
+    "interests": [
+      "Mountaineering",
+      "Backcountry skiing",
+      "Rock geology"
+    ],
+    "gearOwned": [
+      "Full trad rack",
+      "Alpine gear",
+      "Ropes",
+      "Helmet",
+      "Approach shoes"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user003",
+    "email": "mike.chen@email.com",
+    "phoneNumber": "+1-555-0103",
+    "firstName": "Mike",
+    "lastName": "Chen",
+    "bio": "Weekend warrior who loves sport climbing. Always looking for new routes to try!",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -121.4944,
+          38.5816
+        ]
+      },
+      "address": {
+        "line1": "890 Oak Street",
+        "line2": "Apt 4B",
+        "city": "Sacramento",
+        "state": "CA",
+        "zip": "95814"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Sport",
+          "grade": "5.10c",
+          "yearsExperience": 4,
+          "certified": false
+        },
+        {
+          "name": "Top Rope",
+          "grade": "5.11a",
+          "yearsExperience": 6,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [],
+      "tuesday": [],
+      "wednesday": [
+        "Evening"
+      ],
+      "thursday": [
+        "Evening"
+      ],
+      "friday": [
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "system",
+      "openToClimbingTypes": [
+        {
+          "name": "Sport",
+          "preferredGrade": "5.9-5.11",
+          "certified": false
+        }
+      ],
+      "searchRadius": 75
+    },
+    "interests": [
+      "Craft beer",
+      "Mountain biking",
+      "Camping"
+    ],
+    "gearOwned": [
+      "Harness",
+      "Shoes",
+      "Helmet",
+      "Sport draws",
+      "Belay device"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user004",
+    "email": "emma.thompson@email.com",
+    "phoneNumber": "+1-555-0104",
+    "firstName": "Emma",
+    "lastName": "Thompson",
+    "bio": "New to climbing but absolutely hooked! Looking for patient partners to learn with.",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "address": {
+        "line1": "123 Mission Street",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94103"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Top Rope",
+          "grade": "5.7",
+          "yearsExperience": 1,
+          "certified": false
+        },
+        {
+          "name": "Bouldering",
+          "grade": "V2",
+          "yearsExperience": 1,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Evening"
+      ],
+      "tuesday": [
+        "Evening"
+      ],
+      "wednesday": [
+        "Evening"
+      ],
+      "thursday": [
+        "Evening"
+      ],
+      "friday": [
+        "Evening"
+      ],
+      "saturday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "light",
+      "openToClimbingTypes": [
+        {
+          "name": "Top Rope",
+          "preferredGrade": "5.6-5.8",
+          "certified": false
+        },
+        {
+          "name": "Bouldering",
+          "preferredGrade": "V0-V3",
+          "certified": false
+        }
+      ],
+      "searchRadius": 30
+    },
+    "interests": [
+      "Yoga",
+      "Reading",
+      "Coffee"
+    ],
+    "gearOwned": [
+      "Climbing shoes",
+      "Chalk bag",
+      "Harness"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user005",
+    "email": "david.wilson@email.com",
+    "phoneNumber": "+1-555-0105",
+    "firstName": "David",
+    "lastName": "Wilson",
+    "bio": "Ice climbing specialist from the Northeast. Love winter adventures and frozen waterfalls!",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -71.0589,
+          42.3601
+        ]
+      },
+      "address": {
+        "line1": "456 Beacon Hill Rd",
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02108"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Ice",
+          "grade": "WI4",
+          "yearsExperience": 7,
+          "certified": true
+        },
+        {
+          "name": "Trad",
+          "grade": "5.9",
+          "yearsExperience": 12,
+          "certified": false
+        },
+        {
+          "name": "Alpine",
+          "grade": "5.7",
+          "yearsExperience": 9,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Evening"
+      ],
+      "tuesday": [
+        "Evening"
+      ],
+      "wednesday": [
+        "Evening"
+      ],
+      "thursday": [
+        "Evening"
+      ],
+      "friday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "dark",
+      "openToClimbingTypes": [
+        {
+          "name": "Ice",
+          "preferredGrade": "WI3-WI5",
+          "certified": true
+        },
+        {
+          "name": "Alpine",
+          "preferredGrade": "5.6-5.9",
+          "certified": false
+        }
+      ],
+      "searchRadius": 150
+    },
+    "interests": [
+      "Skiing",
+      "Mountaineering",
+      "Winter photography"
+    ],
+    "gearOwned": [
+      "Ice tools",
+      "Crampons",
+      "Alpine rack",
+      "Winter gear",
+      "Ropes"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user006",
+    "email": "lisa.garcia@email.com",
+    "phoneNumber": "+1-555-0106",
+    "firstName": "Lisa",
+    "lastName": "Garcia",
+    "bio": "Gym climber transitioning to outdoor routes. Excited to explore real rock!",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -97.7431,
+          30.2672
+        ]
+      },
+      "address": {
+        "line1": "789 South Lamar Blvd",
+        "city": "Austin",
+        "state": "TX",
+        "zip": "78704"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Top Rope",
+          "grade": "5.10a",
+          "yearsExperience": 2,
+          "certified": false
+        },
+        {
+          "name": "Bouldering",
+          "grade": "V4",
+          "yearsExperience": 3,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Evening"
+      ],
+      "tuesday": [
+        "Evening"
+      ],
+      "wednesday": [
+        "Evening"
+      ],
+      "thursday": [
+        "Evening"
+      ],
+      "friday": [
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "sunday": [
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "system",
+      "openToClimbingTypes": [
+        {
+          "name": "Sport",
+          "preferredGrade": "5.8-5.10",
+          "certified": false
+        },
+        {
+          "name": "Top Rope",
+          "preferredGrade": "5.9-5.11",
+          "certified": false
+        }
+      ],
+      "searchRadius": 50
+    },
+    "interests": [
+      "Live music",
+      "Food trucks",
+      "Trail running"
+    ],
+    "gearOwned": [
+      "Harness",
+      "Shoes",
+      "Chalk bag",
+      "Belay device"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user007",
+    "email": "james.brown@email.com",
+    "phoneNumber": "+1-555-0107",
+    "firstName": "James",
+    "lastName": "Brown",
+    "bio": "Aid climbing enthusiast who loves big walls and multi-day adventures.",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -119.5383,
+          37.8651
+        ]
+      },
+      "address": {
+        "line1": "321 Valley View Dr",
+        "city": "Yosemite Valley",
+        "state": "CA",
+        "zip": "95389"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Aid",
+          "grade": "A3",
+          "yearsExperience": 15,
+          "certified": false
+        },
+        {
+          "name": "Trad",
+          "grade": "5.11a",
+          "yearsExperience": 18,
+          "certified": false
+        },
+        {
+          "name": "Sport",
+          "grade": "5.12a",
+          "yearsExperience": 20,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "tuesday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "wednesday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "thursday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "friday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "light",
+      "openToClimbingTypes": [
+        {
+          "name": "Aid",
+          "preferredGrade": "A2-A4",
+          "certified": false
+        },
+        {
+          "name": "Trad",
+          "preferredGrade": "5.9-5.12",
+          "certified": false
+        }
+      ],
+      "searchRadius": 200
+    },
+    "interests": [
+      "Big wall climbing",
+      "Wilderness survival",
+      "Rock history"
+    ],
+    "gearOwned": [
+      "Full aid rack",
+      "Portaledge",
+      "Haul bags",
+      "Multiple ropes",
+      "Aiders"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user008",
+    "email": "rachel.davis@email.com",
+    "phoneNumber": "+1-555-0108",
+    "firstName": "Rachel",
+    "lastName": "Davis",
+    "bio": "Competitive boulderer and coach. Love helping others improve their technique!",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -111.8910,
+          40.7608
+        ]
+      },
+      "address": {
+        "line1": "654 Canyon Road",
+        "city": "Salt Lake City",
+        "state": "UT",
+        "zip": "84103"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Bouldering",
+          "grade": "V10",
+          "yearsExperience": 12,
+          "certified": true
+        },
+        {
+          "name": "Sport",
+          "grade": "5.12c",
+          "yearsExperience": 10,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "tuesday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "wednesday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "thursday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "friday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "dark",
+      "openToClimbingTypes": [
+        {
+          "name": "Bouldering",
+          "preferredGrade": "V6-V12",
+          "certified": true
+        },
+        {
+          "name": "Sport",
+          "preferredGrade": "5.11-5.13",
+          "certified": false
+        }
+      ],
+      "searchRadius": 75
+    },
+    "interests": [
+      "Coaching",
+      "Competition climbing",
+      "Training methodology"
+    ],
+    "gearOwned": [
+      "Multiple crash pads",
+      "Training equipment",
+      "Competition gear"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user009",
+    "email": "kevin.lee@email.com",
+    "phoneNumber": "+1-555-0109",
+    "firstName": "Kevin",
+    "lastName": "Lee",
+    "bio": "Love exploring new crags and documenting routes. Always have my camera ready!",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -122.3321,
+          47.6062
+        ]
+      },
+      "address": {
+        "line1": "987 Pine Street",
+        "line2": "Unit 12",
+        "city": "Seattle",
+        "state": "WA",
+        "zip": "98101"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Sport",
+          "grade": "5.11b",
+          "yearsExperience": 6,
+          "certified": false
+        },
+        {
+          "name": "Trad",
+          "grade": "5.10a",
+          "yearsExperience": 4,
+          "certified": false
+        },
+        {
+          "name": "Alpine",
+          "grade": "5.8",
+          "yearsExperience": 3,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Evening"
+      ],
+      "tuesday": [
+        "Evening"
+      ],
+      "wednesday": [
+        "Evening"
+      ],
+      "thursday": [
+        "Evening"
+      ],
+      "friday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "system",
+      "openToClimbingTypes": [
+        {
+          "name": "Sport",
+          "preferredGrade": "5.10-5.12",
+          "certified": false
+        },
+        {
+          "name": "Alpine",
+          "preferredGrade": "5.7-5.10",
+          "certified": false
+        }
+      ],
+      "searchRadius": 100
+    },
+    "interests": [
+      "Photography",
+      "Route development",
+      "Guidebook writing"
+    ],
+    "gearOwned": [
+      "Camera gear",
+      "Sport rack",
+      "Basic trad gear",
+      "Approach shoes"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user010",
+    "email": "amanda.white@email.com",
+    "phoneNumber": "+1-555-0110",
+    "firstName": "Amanda",
+    "lastName": "White",
+    "bio": "Weekend climber who enjoys both indoor and outdoor adventures. Always up for trying new routes!",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -104.9903,
+          39.7392
+        ]
+      },
+      "address": {
+        "line1": "147 Cherry Creek Dr",
+        "city": "Denver",
+        "state": "CO",
+        "zip": "80206"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Sport",
+          "grade": "5.10b",
+          "yearsExperience": 3,
+          "certified": false
+        },
+        {
+          "name": "Bouldering",
+          "grade": "V3",
+          "yearsExperience": 2,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [],
+      "tuesday": [],
+      "wednesday": [
+        "Evening"
+      ],
+      "thursday": [
+        "Evening"
+      ],
+      "friday": [
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "light",
+      "openToClimbingTypes": [
+        {
+          "name": "Sport",
+          "preferredGrade": "5.8-5.11",
+          "certified": false
+        },
+        {
+          "name": "Top Rope",
+          "preferredGrade": "5.9-5.11",
+          "certified": false
+        }
+      ],
+      "searchRadius": 40
+    },
+    "interests": [
+      "Hiking",
+      "Craft beer",
+      "Live music"
+    ],
+    "gearOwned": [
+      "Harness",
+      "Shoes",
+      "Chalk bag",
+      "Quickdraws",
+      "Belay device"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user011",
+    "email": "chris.taylor@email.com",
+    "phoneNumber": "+1-555-0111",
+    "firstName": "Chris",
+    "lastName": "Taylor",
+    "bio": "Traditional climbing purist who loves the mental challenge of placing gear.",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -109.5498,
+          38.5733
+        ]
+      },
+      "address": {
+        "line1": "258 Desert View Rd",
+        "city": "Moab",
+        "state": "UT",
+        "zip": "84532"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Trad",
+          "grade": "5.11c",
+          "yearsExperience": 14,
+          "certified": false
+        },
+        {
+          "name": "Sport",
+          "grade": "5.12a",
+          "yearsExperience": 16,
+          "certified": false
+        },
+        {
+          "name": "Aid",
+          "grade": "A2",
+          "yearsExperience": 8,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "tuesday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "wednesday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "thursday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "friday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "dark",
+      "openToClimbingTypes": [
+        {
+          "name": "Trad",
+          "preferredGrade": "5.8-5.12",
+          "certified": false
+        },
+        {
+          "name": "Aid",
+          "preferredGrade": "A1-A3",
+          "certified": false
+        }
+      ],
+      "searchRadius": 150
+    },
+    "interests": [
+      "Desert climbing",
+      "Crack climbing",
+      "Gear placement"
+    ],
+    "gearOwned": [
+      "Full trad rack",
+      "Multiple rope sets",
+      "Aid gear",
+      "Approach shoes"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user012",
+    "email": "nicole.anderson@email.com",
+    "phoneNumber": "+1-555-0112",
+    "firstName": "Nicole",
+    "lastName": "Anderson",
+    "bio": "Beginner climber eager to learn and improve. Looking for mentors and climbing partners!",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -80.1918,
+          25.7617
+        ]
+      },
+      "address": {
+        "line1": "369 Ocean Drive",
+        "city": "Miami",
+        "state": "FL",
+        "zip": "33139"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Top Rope",
+          "grade": "5.6",
+          "yearsExperience": 0.5,
+          "certified": false
+        },
+        {
+          "name": "Bouldering",
+          "grade": "V1",
+          "yearsExperience": 0.5,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Evening"
+      ],
+      "tuesday": [
+        "Evening"
+      ],
+      "wednesday": [
+        "Evening"
+      ],
+      "thursday": [
+        "Evening"
+      ],
+      "friday": [
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "light",
+      "openToClimbingTypes": [
+        {
+          "name": "Top Rope",
+          "preferredGrade": "5.5-5.8",
+          "certified": false
+        },
+        {
+          "name": "Bouldering",
+          "preferredGrade": "V0-V2",
+          "certified": false
+        }
+      ],
+      "searchRadius": 25
+    },
+    "interests": [
+      "Beach activities",
+      "Fitness",
+      "Travel"
+    ],
+    "gearOwned": [
+      "Climbing shoes",
+      "Chalk bag"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user013",
+    "email": "ryan.miller@email.com",
+    "phoneNumber": "+1-555-0113",
+    "firstName": "Ryan",
+    "lastName": "Miller",
+    "bio": "Alpine climbing specialist who loves high altitude adventures and technical routes.",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -106.3478,
+          39.1911
+        ]
+      },
+      "address": {
+        "line1": "741 Summit Ave",
+        "city": "Aspen",
+        "state": "CO",
+        "zip": "81611"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Alpine",
+          "grade": "5.10a",
+          "yearsExperience": 11,
+          "certified": true
+        },
+        {
+          "name": "Ice",
+          "grade": "WI3",
+          "yearsExperience": 8,
+          "certified": false
+        },
+        {
+          "name": "Trad",
+          "grade": "5.10c",
+          "yearsExperience": 13,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "tuesday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "wednesday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "thursday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "friday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "system",
+      "openToClimbingTypes": [
+        {
+          "name": "Alpine",
+          "preferredGrade": "5.7-5.11",
+          "certified": true
+        },
+        {
+          "name": "Ice",
+          "preferredGrade": "WI2-WI4",
+          "certified": false
+        }
+      ],
+      "searchRadius": 200
+    },
+    "interests": [
+      "Mountaineering",
+      "Backcountry skiing",
+      "High altitude training"
+    ],
+    "gearOwned": [
+      "Alpine rack",
+      "Ice gear",
+      "Mountaineering boots",
+      "Technical rescue gear"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user014",
+    "email": "jessica.moore@email.com",
+    "phoneNumber": "+1-555-0114",
+    "firstName": "Jessica",
+    "lastName": "Moore",
+    "bio": "Sport climbing enthusiast who loves traveling to different crags around the world.",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -83.0458,
+          42.3314
+        ]
+      },
+      "address": {
+        "line1": "852 Woodward Ave",
+        "city": "Detroit",
+        "state": "MI",
+        "zip": "48226"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Sport",
+          "grade": "5.11d",
+          "yearsExperience": 9,
+          "certified": false
+        },
+        {
+          "name": "Bouldering",
+          "grade": "V5",
+          "yearsExperience": 7,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Evening"
+      ],
+      "tuesday": [
+        "Evening"
+      ],
+      "wednesday": [
+        "Evening"
+      ],
+      "thursday": [
+        "Evening"
+      ],
+      "friday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "system",
+      "openToClimbingTypes": [
+        {
+          "name": "Sport",
+          "preferredGrade": "5.10-5.12",
+          "certified": false
+        }
+      ],
+      "searchRadius": 60
+    },
+    "interests": [
+      "Travel",
+      "International climbing",
+      "Cultural exchange"
+    ],
+    "gearOwned": [
+      "Sport rack",
+      "Travel gear",
+      "Guidebooks",
+      "Crash pad"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user015",
+    "email": "brandon.clark@email.com",
+    "phoneNumber": "+1-555-0115",
+    "firstName": "Brandon",
+    "lastName": "Clark",
+    "bio": "Multi-pitch trad climber who loves long routes and beautiful exposure.",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -111.9461,
+          36.1069
+        ]
+      },
+      "address": {
+        "line1": "963 Red Rock Dr",
+        "city": "Las Vegas",
+        "state": "NV",
+        "zip": "89117"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Trad",
+          "grade": "5.10b",
+          "yearsExperience": 9,
+          "certified": false
+        },
+        {
+          "name": "Sport",
+          "grade": "5.11a",
+          "yearsExperience": 11,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Evening"
+      ],
+      "tuesday": [
+        "Evening"
+      ],
+      "wednesday": [
+        "Evening"
+      ],
+      "thursday": [
+        "Evening"
+      ],
+      "friday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "dark",
+      "openToClimbingTypes": [
+        {
+          "name": "Trad",
+          "preferredGrade": "5.8-5.11",
+          "certified": false
+        },
+        {
+          "name": "Sport",
+          "preferredGrade": "5.9-5.12",
+          "certified": false
+        }
+      ],
+      "searchRadius": 80
+    },
+    "interests": [
+      "Multi-pitch climbing",
+      "Desert landscapes",
+      "Route finding"
+    ],
+    "gearOwned": [
+      "Full trad rack",
+      "Multiple ropes",
+      "Approach shoes",
+      "Helmet"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user016",
+    "email": "stephanie.wright@email.com",
+    "phoneNumber": "+1-555-0116",
+    "firstName": "Stephanie",
+    "lastName": "Wright",
+    "bio": "Bouldering enthusiast who loves working projects and pushing grades.",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -105.2705,
+          40.0150
+        ]
+      },
+      "address": {
+        "line1": "174 College Ave",
+        "city": "Boulder",
+        "state": "CO",
+        "zip": "80302"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Bouldering",
+          "grade": "V8",
+          "yearsExperience": 8,
+          "certified": false
+        },
+        {
+          "name": "Sport",
+          "grade": "5.12a",
+          "yearsExperience": 6,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "tuesday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "wednesday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "thursday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "friday": [
+        "Afternoon",
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "light",
+      "openToClimbingTypes": [
+        {
+          "name": "Bouldering",
+          "preferredGrade": "V5-V10",
+          "certified": false
+        },
+        {
+          "name": "Sport",
+          "preferredGrade": "5.11-5.13",
+          "certified": false
+        }
+      ],
+      "searchRadius": 45
+    },
+    "interests": [
+      "Project climbing",
+      "Training",
+      "Outdoor fitness"
+    ],
+    "gearOwned": [
+      "Multiple crash pads",
+      "Brush",
+      "Training equipment",
+      "Sport gear"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user017",
+    "email": "tyler.rodriguez@email.com",
+    "phoneNumber": "+1-555-0117",
+    "firstName": "Tyler",
+    "lastName": "Rodriguez",
+    "bio": "Gym owner and route setter. Love sharing the stoke for climbing with newcomers!",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -118.2437,
+          34.0522
+        ]
+      },
+      "address": {
+        "line1": "285 Sunset Blvd",
+        "city": "Los Angeles",
+        "state": "CA",
+        "zip": "90026"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Sport",
+          "grade": "5.12b",
+          "yearsExperience": 15,
+          "certified": true
+        },
+        {
+          "name": "Bouldering",
+          "grade": "V7",
+          "yearsExperience": 12,
+          "certified": true
+        },
+        {
+          "name": "Top Rope",
+          "grade": "5.12c",
+          "yearsExperience": 18,
+          "certified": true
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "tuesday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "wednesday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "thursday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "friday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "system",
+      "openToClimbingTypes": [
+        {
+          "name": "Sport",
+          "preferredGrade": "5.8-5.13",
+          "certified": true
+        },
+        {
+          "name": "Bouldering",
+          "preferredGrade": "V2-V9",
+          "certified": true
+        }
+      ],
+      "searchRadius": 35
+    },
+    "interests": [
+      "Route setting",
+      "Coaching",
+      "Business development"
+    ],
+    "gearOwned": [
+      "Route setting tools",
+      "Full sport rack",
+      "Crash pads",
+      "Teaching equipment"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user018",
+    "email": "megan.phillips@email.com",
+    "phoneNumber": "+1-555-0118",
+    "firstName": "Megan",
+    "lastName": "Phillips",
+    "bio": "Outdoor educator who combines climbing with environmental awareness and conservation.",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -121.3269,
+          44.0582
+        ]
+      },
+      "address": {
+        "line1": "396 Pine Ridge Rd",
+        "city": "Bend",
+        "state": "OR",
+        "zip": "97701"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Trad",
+          "grade": "5.9",
+          "yearsExperience": 7,
+          "certified": true
+        },
+        {
+          "name": "Sport",
+          "grade": "5.10d",
+          "yearsExperience": 9,
+          "certified": false
+        },
+        {
+          "name": "Alpine",
+          "grade": "5.7",
+          "yearsExperience": 5,
+          "certified": true
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "tuesday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "wednesday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "thursday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "friday": [
+        "Morning",
+        "Afternoon"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "light",
+      "openToClimbingTypes": [
+        {
+          "name": "Trad",
+          "preferredGrade": "5.6-5.10",
+          "certified": true
+        },
+        {
+          "name": "Alpine",
+          "preferredGrade": "5.5-5.8",
+          "certified": true
+        }
+      ],
+      "searchRadius": 120
+    },
+    "interests": [
+      "Environmental education",
+      "Leave No Trace",
+      "Wilderness skills"
+    ],
+    "gearOwned": [
+      "Trad rack",
+      "Alpine gear",
+      "Educational materials",
+      "First aid kit"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user019",
+    "email": "daniel.cooper@email.com",
+    "phoneNumber": "+1-555-0119",
+    "firstName": "Daniel",
+    "lastName": "Cooper",
+    "bio": "Weekend warrior who loves exploring new areas and meeting climbing partners.",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -77.0369,
+          38.9072
+        ]
+      },
+      "address": {
+        "line1": "507 K Street NW",
+        "line2": "Suite 200",
+        "city": "Washington",
+        "state": "DC",
+        "zip": "20001"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Sport",
+          "grade": "5.10a",
+          "yearsExperience": 5,
+          "certified": false
+        },
+        {
+          "name": "Top Rope",
+          "grade": "5.10c",
+          "yearsExperience": 7,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [],
+      "tuesday": [],
+      "wednesday": [
+        "Evening"
+      ],
+      "thursday": [
+        "Evening"
+      ],
+      "friday": [
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "dark",
+      "openToClimbingTypes": [
+        {
+          "name": "Sport",
+          "preferredGrade": "5.8-5.11",
+          "certified": false
+        },
+        {
+          "name": "Top Rope",
+          "preferredGrade": "5.9-5.11",
+          "certified": false
+        }
+      ],
+      "searchRadius": 90
+    },
+    "interests": [
+      "Weekend trips",
+      "New area exploration",
+      "Photography"
+    ],
+    "gearOwned": [
+      "Sport rack",
+      "Harness",
+      "Shoes",
+      "Belay device"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  },
+  {
+    "authId": "auth0|user020",
+    "email": "ashley.turner@email.com",
+    "phoneNumber": "+1-555-0120",
+    "firstName": "Ashley",
+    "lastName": "Turner",
+    "bio": "Adaptive climbing advocate who believes climbing is for everyone. Love inclusive climbing communities!",
+    "location": {
+      "geoJSON": {
+        "type": "Point",
+        "coordinates": [
+          -84.3880,
+          33.7490
+        ]
+      },
+      "address": {
+        "line1": "618 Peachtree St",
+        "city": "Atlanta",
+        "state": "GA",
+        "zip": "30308"
+      }
+    },
+    "climbingExperience": {
+      "disciplines": [
+        {
+          "name": "Top Rope",
+          "grade": "5.9",
+          "yearsExperience": 4,
+          "certified": true
+        },
+        {
+          "name": "Bouldering",
+          "grade": "V3",
+          "yearsExperience": 3,
+          "certified": false
+        }
+      ]
+    },
+    "availability": {
+      "monday": [
+        "Evening"
+      ],
+      "tuesday": [
+        "Evening"
+      ],
+      "wednesday": [
+        "Evening"
+      ],
+      "thursday": [
+        "Evening"
+      ],
+      "friday": [
+        "Evening"
+      ],
+      "saturday": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "sunday": [
+        "Morning",
+        "Afternoon"
+      ]
+    },
+    "preferences": {
+      "colorTheme": "system",
+      "openToClimbingTypes": [
+        {
+          "name": "Top Rope",
+          "preferredGrade": "5.6-5.10",
+          "certified": true
+        },
+        {
+          "name": "Bouldering",
+          "preferredGrade": "V1-V4",
+          "certified": false
+        }
+      ],
+      "searchRadius": 55
+    },
+    "interests": [
+      "Adaptive climbing",
+      "Community building",
+      "Accessibility advocacy"
+    ],
+    "gearOwned": [
+      "Adaptive gear",
+      "Harness",
+      "Shoes",
+      "Belay device"
+    ],
+    "communitiesJoined": [],
+    "connections": [],
+    "requestsSent": [],
+    "requestsReceived": [],
+    "blocked": [],
+    "registrationCompleted": true
+  }
+]

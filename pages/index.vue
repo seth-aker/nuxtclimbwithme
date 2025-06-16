@@ -1,7 +1,9 @@
 <template>
-   <div class="w-screen h-screen flex flex-col items-center">
-      Lat: {{ user.location.geoJSON?.coordinates[1] }}
-      Long: {{ user.location.geoJSON?.coordinates[0] }}
+  <div class="w-screen h-screen flex flex-col items-center">
+    <LoadingSpinner v-if="status === 'pending'" />
+    <div v-else-if="status === 'success'">
+      {{ data?.toString() }}
+    </div>
   </div>
 </template>
 
@@ -17,4 +19,7 @@ definePageMeta({
 })
 const { user } = useUserStore();
 useUpdateUserLocation();
+const { error, data, status } = await useFetch('/api/users/nearby');
+
+
 </script>
