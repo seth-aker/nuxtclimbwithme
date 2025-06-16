@@ -12,7 +12,8 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/image',
     '@nuxt/icon',
-    '@nuxt/test-utils/module',
+    // Only include test utils when running tests
+    ...(process.env.NODE_ENV === 'test' ? ['@nuxt/test-utils/module'] : []),
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
     'nuxt-oidc-auth',
