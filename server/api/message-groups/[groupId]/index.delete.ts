@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 import ChatGroup from "~/server/models/MessageGroup";
 import ChatMessage from "~/server/models/Message";
-import findUserBySub from "~/server/utils/findUserBySub";
+import authorizeUser from "~/server/utils/authorizeUser";
+import fetchUser from "~/server/utils/fetchUser";
 
 export default defineEventHandler(async (event) => {
-    //authorize();
-    const user = await findUserBySub(event);
+    const session = await authorizeUser(event);
+    const user = await fetchUser(session.userInfo?.sub as string)
     const groupId = getRouterParam(event, 'groupId');
     if(!groupId) {
         throw createError({
@@ -38,8 +39,8 @@ export default defineEventHandler(async (event) => {
         })
     }
     const db = event.context.mongoose as mongoose.Connection;
-    const session = await db.startSession()
-    await session.withTransaction(async () => {
+    const dbSession = await db.startSession()
+    await dbSession.withTransaction(async () => {
         await ChatMessage.deleteMany({groupId: groupId}).exec();
         const groupResult = await ChatGroup.deleteOne({_id: groupId}).exec();
         if(groupResult.deletedCount === 0) {
@@ -47,6 +48,6 @@ export default defineEventHandler(async (event) => {
         }
         // TODO: check to make sure that all messages are deleted
     })
-    await session.endSession();
+    await dbSession.endSession();
     setResponseStatus(event, 204, "No Content")
 })

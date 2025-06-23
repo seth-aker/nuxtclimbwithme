@@ -1,7 +1,9 @@
 import User from "~/server/models/User";
-import findUserBySub from "~/server/utils/findUserBySub";
+import authorizeUser from "~/server/utils/authorizeUser";
+import fetchUser from "~/server/utils/fetchUser";
 export default defineEventHandler(async (event) => {
-  const currentUser = await findUserBySub(event);
+  const session = await authorizeUser(event);
+  const currentUser = await fetchUser(session.userInfo?.sub as string)
   const userId = getRouterParam(event, 'id');
   if (currentUser._id.toString() !== userId) {
       throw createError({

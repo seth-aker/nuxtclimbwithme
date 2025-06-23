@@ -1,11 +1,12 @@
 import ConnectionRequest from "~/server/models/ConnectionRequest";
 import User from "~/server/models/User";
-import findUserBySub from "~/server/utils/findUserBySub";
+import authorizeUser from "~/server/utils/authorizeUser";
+import fetchUser from "~/server/utils/fetchUser";
 
 export default defineEventHandler(async(event) => {
-    // authorize()
+    const session = await authorizeUser(event);
+    const user = await fetchUser(session.userInfo?.sub as string)
     const receiverId = getRouterParam(event, 'receiverId');
-    const user = await findUserBySub(event);
     const receiver = await User.findById(receiverId).exec();
     if(!receiver) {
         throw createError({

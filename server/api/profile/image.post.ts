@@ -1,9 +1,9 @@
-import { getUserSession } from "nuxt-oidc-auth/runtime/server/utils/session.js";
+import authorizeUser from "~/server/utils/authorizeUser";
+import fetchUser from "~/server/utils/fetchUser";
 
 export default defineEventHandler(async (event) => {
-    // authorize(event)
+    const session = await authorizeUser(event)
     const config = useRuntimeConfig();
-    const session = await getUserSession(event)
     const aws = event.context.aws;
     try {
         const file = await readFormData(event)
@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
         if(response.status !== 200) {
             createError('An error occurred uploading file');
         }
-        const user = await findUserBySub(event);
+        const user = await fetchUser(session.userInfo?.sub as string)
         user.profilePicture = `${response.url}?cache=${Date.now()}`;
         user.save();
         return {status: 200}        

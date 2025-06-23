@@ -1,10 +1,12 @@
 import Gym from "~/server/models/Gym";
+import authorizeUser from "~/server/utils/authorizeUser";
+import fetchUser from "~/server/utils/fetchUser";
 
 export default defineEventHandler(async (event) => {
-  // authorize();
+  const session = await authorizeUser(event);
+  const user = await fetchUser(session.userInfo?.sub as string)
   const body = await readValidatedBody(event, validateGym);
   const gymId = getRouterParam(event, 'gymId');
-  const user = await findUserBySub(event);
   const gym = await Gym.findById(gymId).exec();
   if(!gym) {
     throw createError({

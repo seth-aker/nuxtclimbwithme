@@ -1,12 +1,14 @@
 import { z } from "zod";
 import ConnectionRequest from "~/server/models/ConnectionRequest";
+import authorizeUser from "~/server/utils/authorizeUser";
+import fetchUser from "~/server/utils/fetchUser";
 const statusSchema = z.object({status: z.enum(['Pending', 'Accepted', 'Rejected', 'Withdrawn'])});
 
 export default defineEventHandler(async(event) => {
-    //authorize()
+    const session = await authorizeUser(event);
+    const user = await fetchUser(session.userInfo?.sub as string)
     const requestId = getRouterParam(event, 'requestId');
     const query = await getValidatedQuery(event, statusSchema.safeParse);
-    const user = await findUserBySub(event);
     if(!query.success) {
         throw createError({
             statusCode: 400,

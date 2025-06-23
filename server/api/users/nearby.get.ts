@@ -1,7 +1,9 @@
-import mongoose, { ObjectId } from 'mongoose';
+import mongoose from 'mongoose';
 import * as z from 'zod'
 import User, { IClimbingDiscipline, IUserPrivate, trimPrivateFields } from '~/server/models/User';
+import authorizeUser from '~/server/utils/authorizeUser';
 import { calculateCompatabilityScore, calculateDistance } from '~/server/utils/calculateScores';
+import fetchUser from '~/server/utils/fetchUser';
 
 interface IUserSearchQuery {
   searchRadius?: number, //in miles
@@ -17,7 +19,8 @@ const MAX_SEARCH_RADIUS_MILES = 500 // Maximum radius to expand to
 const RADIUS_EXPANSION_MULTIPLIER = 2 // How much to multiply radius by each iteration
 const MINIMUM_RESULTS = 5
 export default defineEventHandler(async (event) => {
-  const currentUser = await findUserBySub(event);
+  const session = await authorizeUser(event);
+  const currentUser = await fetchUser(session.userInfo?.sub as string)
   if(!currentUser.location.geoJSON) {
     throw createError({
       statusCode: 400,

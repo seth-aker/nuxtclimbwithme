@@ -1,8 +1,7 @@
-import { getUserSession } from "nuxt-oidc-auth/runtime/server/utils/session.js";
 import User from "~/server/models/User";
+import authorizeUser from "~/server/utils/authorizeUser";
 export default defineEventHandler(async (event) => {
-    // authoriz()
-    const session = await getUserSession(event);
+    const session = await authorizeUser(event)
     if(!session.userInfo) {
         throw createError({
             statusCode: 401,

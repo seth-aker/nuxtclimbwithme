@@ -1,5 +1,5 @@
 import ConnectionRequest from "~/server/models/ConnectionRequest";
-import findUserBySub from "~/server/utils/findUserBySub"
+import findUserBySub from "~/server/utils/fetchUser"
 
 export default defineEventHandler(async (event) => {
     // authorize();

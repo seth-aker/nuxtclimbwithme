@@ -1,10 +1,11 @@
 import ChatGroup from "~/server/models/MessageGroup";
-import ChatMessage from "~/server/models/Message";
-import findUserBySub from "~/server/utils/findUserBySub";
 import userIsGroupMember from "~/server/utils/userIsGroupMember";
+import authorizeUser from "~/server/utils/authorizeUser";
+import fetchUser from "~/server/utils/fetchUser";
 
 export default defineEventHandler(async (event) => {
-    // authorize()
+    const session = await authorizeUser(event);
+    const user = await fetchUser(session.userInfo?.sub as string)
     const groupId = getRouterParam(event, 'groupId');
     if(!groupId) {
         throw createError({
@@ -13,7 +14,6 @@ export default defineEventHandler(async (event) => {
             message: "[API] Missing group id"
         })
     }
-    const user = await findUserBySub(event);
     const chatGroup = await ChatGroup.findById(groupId).exec();
     if(!chatGroup) {
         throw createError({

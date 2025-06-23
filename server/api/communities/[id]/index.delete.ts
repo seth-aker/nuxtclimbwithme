@@ -1,8 +1,10 @@
 import Community from "~/server/models/Community";
-import findUserBySub from "~/server/utils/findUserBySub";
+import authorizeUser from "~/server/utils/authorizeUser";
+import fetchUser from "~/server/utils/fetchUser";
 
 export default defineEventHandler(async (event) => {
-  const user = await findUserBySub(event);
+  const session = await authorizeUser(event);
+  const user = await fetchUser(session.userInfo?.sub as string)
   const id = getRouterParam(event, 'id');
   if (!id) {
     throw createError({

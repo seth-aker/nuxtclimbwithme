@@ -1,6 +1,8 @@
 import Community from "~/server/models/Community";
+import authorizeUser from "~/server/utils/authorizeUser";
 
 export default defineEventHandler(async (event) => {
+  await authorizeUser(event);
   const id = getRouterParam(event, 'id');
   if (!id) {
     throw createError({

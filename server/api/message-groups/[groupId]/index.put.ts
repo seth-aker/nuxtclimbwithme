@@ -1,10 +1,11 @@
 import MessageGroup from "~/server/models/MessageGroup";
-import findUserBySub from "~/server/utils/findUserBySub";
-
+import authorizeUser from "~/server/utils/authorizeUser";
+import fetchUser from "~/server/utils/fetchUser";
 
 export default defineEventHandler(async (event) => {
     //authorize()
-    const user = await findUserBySub(event);
+    const session = await authorizeUser(event);
+    const user = await fetchUser(session.userInfo?.sub as string)
     readBodyProtection(event);
     const body = await readValidatedBody(event, validateMessageGroup);
     const groupId = getRouterParam(event, 'groupId');
