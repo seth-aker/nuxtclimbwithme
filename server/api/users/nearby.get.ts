@@ -47,18 +47,10 @@ export default defineEventHandler(async (event) => {
 
   // Progressive search with expanding radius
   let currentRadius = searchParams.searchRadius ?? currentUser.preferences.searchRadius ?? DEFAULT_SEARCH_RADIUS_MILES;
-  let searchResults: (mongoose.Document<unknown, {}, IUserPrivate> & IUserPrivate & Required<{
-          _id: mongoose.Types.ObjectId;
-      }> & {
-          __v: number;
-      })[] = [];
+  let searchResults: IUserPrivate[] = [];
 
 let scoredResults: {
-        user: mongoose.Document<unknown, {}, IUserPrivate> & IUserPrivate & Required<{
-            _id: mongoose.Types.ObjectId;
-        }> & {
-            __v: number;
-        };
+        user: IUserPrivate;
         score: number;
         distance: number;
       }[] = []
