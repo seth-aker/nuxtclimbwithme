@@ -21,9 +21,8 @@ export default defineEventHandler(async (event) => {
     });
   }
   let isOwner = false;
-  for (let index = 0; index < community.ownerIds.length; index++) {
-    const ownerId = community.ownerIds[index];
-    if (ownerId.equals(user._id)) {
+  for(const id in community.ownerIds) {
+    if(user._id.equals(id)) {
       isOwner = true;
       break;
     }

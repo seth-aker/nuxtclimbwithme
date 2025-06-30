@@ -124,7 +124,7 @@ const editAvatar = () => {
       .refine((file) => ["image/png", "image/jpeg", "image/jpg",].includes(file.type), 'Invalid file type.')
       .refine((file) => file.size <= fiveMbSizeLimit, "File should not exceed 5MB")
       .optional(),
-    component: FileInput,
+    component: markRaw(FileInput),
     componentProps: {
       type: 'file'
     }

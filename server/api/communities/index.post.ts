@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
   const body = await readValidatedBody(event, validateCommunity);
   const community = await Community.create({
     ...body,
-    ownerIds: [user._id]
+    ownerIds: [...body.ownerIds, user._id]
   });
   return community;
 });

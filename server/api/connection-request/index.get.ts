@@ -1,9 +1,10 @@
 import ConnectionRequest from "~/server/models/ConnectionRequest";
-import findUserBySub from "~/server/utils/fetchUser"
+import authorizeUser from "~/server/utils/authorizeUser";
+import fetchUser from "~/server/utils/fetchUser";
 
 export default defineEventHandler(async (event) => {
-    // authorize();
-    const user = await findUserBySub(event);
+    const session = await authorizeUser(event);
+    const user = await fetchUser(session.userInfo?.sub as string)
     const _sentRequests = await ConnectionRequest.find({senderId: user._id}).exec();
     const _receivedRequests = await ConnectionRequest.find({receiverId: user._id}).exec();
 
